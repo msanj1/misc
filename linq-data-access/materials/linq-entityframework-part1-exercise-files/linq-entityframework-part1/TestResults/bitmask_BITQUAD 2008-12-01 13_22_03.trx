@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="5bf26503-14bd-4ffb-8160-52ab1b5cfbf7" name="bitmask@BITQUAD 2008-12-01 13:22:03" runUser="bitQuad\bitmask" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Local Test Run" id="0a227923-3949-46e0-949b-83c1bd7f48cd">
+    <Description>This is a default test run configuration for a local test run.</Description>
+    <Deployment runDeploymentRoot="c:\temp\linq-entityframework-part1\TestResults\bitmask_BITQUAD 2008-12-01 13_22_03">
+      <DeploymentItem filename="c:\temp\linq-entityframework-part1\bin\Debug\linq-entityframework-part1.exe" />
+    </Deployment>
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="2" executed="2" error="0" failed="1" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2008-12-01T13:22:03.1857957-05:00" queuing="2008-12-01T13:22:09.4827957-05:00" start="2008-12-01T13:22:09.7897957-05:00" finish="2008-12-01T13:22:27.2767957-05:00" />
+  <TestDefinitions>
+    <UnitTest name="Context_Implements_An_Identity_Map" storage="c:\temp\eftests\bin\debug\eftests.dll" id="9ac7b849-3b69-6585-958e-d8afacdcc257">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="db75e3a2-51d7-4d54-8804-9488a1575257" />
+      <TestMethod codeBase="c:\temp\EFTests\bin\Debug\EFTests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="EFTests.UnitTest1, EFTests" name="Context_Implements_An_Identity_Map" />
+    </UnitTest>
+    <ManualTest name="ManualTest1" storage="c:\temp\eftests\manualtest1.mht" id="69f3985e-c5f1-4862-847f-ef63d09ac4f3">
+      <Css projectStructure="" iteration="" />
+      <Description>To do: set description</Description>
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="58a02db8-ab27-4536-b87e-3d46ee1551c8" />
+    </ManualTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="69f3985e-c5f1-4862-847f-ef63d09ac4f3" executionId="58a02db8-ab27-4536-b87e-3d46ee1551c8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9ac7b849-3b69-6585-958e-d8afacdcc257" executionId="db75e3a2-51d7-4d54-8804-9488a1575257" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <ManualTestResult executionId="58a02db8-ab27-4536-b87e-3d46ee1551c8" testId="69f3985e-c5f1-4862-847f-ef63d09ac4f3" testName="ManualTest1" computerName="BITQUAD" duration="00:00:16.4944404" startTime="2008-12-01T13:22:09.8617957-05:00" endTime="2008-12-01T13:22:26.3627957-05:00" testType="7a24f8ff-85da-d664-ef44-83ff4743dae6" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" testFile="c:\temp\linq-entityframework-part1\TestResults\bitmask_BITQUAD 2008-12-01 13_22_03\Out\manualtest1.mht">
+    </ManualTestResult>
+    <UnitTestResult executionId="db75e3a2-51d7-4d54-8804-9488a1575257" testId="9ac7b849-3b69-6585-958e-d8afacdcc257" testName="Context_Implements_An_Identity_Map" computerName="BITQUAD" duration="00:00:00.1195402" startTime="2008-12-01T13:22:26.4127957-05:00" endTime="2008-12-01T13:22:27.0707957-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method EFTests.UnitTest1.Context_Implements_An_Identity_Map threw exception:  System.ArgumentException: The specified named connection is either not found in the configuration, not intended to be used with the EntityClient provider, or not valid..</Message>
+          <StackTrace>    at System.Data.EntityClient.EntityConnection.ChangeConnectionString(String newConnectionString)
+   at System.Data.EntityClient.EntityConnection..ctor(String connectionString)
+   at System.Data.Objects.ObjectContext.CreateEntityConnection(String connectionString)
+   at System.Data.Objects.ObjectContext..ctor(String connectionString, String defaultContainerName)
+   at linq_entityframework_part1.MovieReviewEntities..ctor() in c:\temp\linq-entityframework-part1\moviereviews.designer.cs:line 27
+   at EFTests.UnitTest1.Context_Implements_An_Identity_Map() in c:\temp\EFTests\UnitTest1.cs:line 21
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

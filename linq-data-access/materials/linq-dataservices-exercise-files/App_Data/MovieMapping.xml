@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Database Name="moviereviews" xmlns="http://schemas.microsoft.com/linqtosql/mapping/2007">
+  <Table Name="dbo.movies" Member="Movies">
+    <Type Name="Poco.Movie">
+      <Column Name="movie_id" Member="ID" />
+      <Column Name="title" Member="Title" />
+      <Column Name="release_date" Member="ReleaseDate"  />
+    </Type>
+  </Table>
+</Database>

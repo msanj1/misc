@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="15b6f7c9-438c-40e7-a84d-d5e08dc3348d" name="bitmask@BITQUAD 2008-12-03 13:43:52" runUser="bitQuad\bitmask" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Local Test Run" id="414701ff-bdf9-4cb1-9753-6a1ec0b317c3">
+    <Description>This is a default test run configuration for a local test run.</Description>
+    <Deployment runDeploymentRoot="c:\temp\linq-entityframework-part2\TestResults\bitmask_BITQUAD 2008-12-03 13_43_52">
+      <DeploymentItem filename="c:\temp\linq-entityframework-part2\bin\Debug\linq-entityframework-part2.exe" />
+    </Deployment>
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2008-12-03T13:43:52.1000000-05:00" queuing="2008-12-03T13:43:53.0550000-05:00" start="2008-12-03T13:43:53.1890000-05:00" finish="2008-12-03T13:43:54.3100000-05:00" />
+  <TestDefinitions>
+    <UnitTest name="Unit_Of_Work_Is_Isolated" storage="c:\temp\testproject1\bin\debug\testproject1.dll" id="5a1d7557-935c-f3a7-3a94-daf0e24dd2bf">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="24e1e27f-d90d-45a2-af29-2fc220a4201a" />
+      <TestMethod codeBase="c:\temp\TestProject1\bin\Debug\TestProject1.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.UnitTest1, TestProject1" name="Unit_Of_Work_Is_Isolated" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="5a1d7557-935c-f3a7-3a94-daf0e24dd2bf" executionId="24e1e27f-d90d-45a2-af29-2fc220a4201a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="24e1e27f-d90d-45a2-af29-2fc220a4201a" testId="5a1d7557-935c-f3a7-3a94-daf0e24dd2bf" testName="Unit_Of_Work_Is_Isolated" computerName="BITQUAD" duration="00:00:00.4543330" startTime="2008-12-03T13:43:53.3040000-05:00" endTime="2008-12-03T13:43:54.2150000-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="a85a42d1-877e-4fb7-a168-513a199b7572" name="bitmask@BITQUAD 2008-12-01 13:24:48" runUser="bitQuad\bitmask" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Local Test Run" id="0a227923-3949-46e0-949b-83c1bd7f48cd">
+    <Description>This is a default test run configuration for a local test run.</Description>
+    <Deployment runDeploymentRoot="c:\temp\linq-entityframework-part1\TestResults\bitmask_BITQUAD 2008-12-01 13_24_48">
+      <DeploymentItem filename="c:\temp\linq-entityframework-part1\bin\Debug\linq-entityframework-part1.exe" />
+    </Deployment>
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Error">
+    <Counters total="1" executed="1" error="0" failed="0" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="BITQUAD" outcome="Error" timestamp="2008-12-01T13:25:06.9227957-05:00">
+        <Text>Test host process exited unexpectedly.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <Times creation="2008-12-01T13:24:48.9537957-05:00" queuing="2008-12-01T13:24:50.3517957-05:00" start="2008-12-01T13:24:50.4937957-05:00" finish="2008-12-01T13:25:06.9237957-05:00" />
+  <TestDefinitions>
+    <UnitTest name="Context_Implements_An_Identity_Map" storage="c:\temp\eftests\bin\debug\eftests.dll" id="9ac7b849-3b69-6585-958e-d8afacdcc257">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="67443d11-748b-4176-8d13-18eb1afc232b" />
+      <TestMethod codeBase="c:\temp\EFTests\bin\Debug\EFTests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="EFTests.UnitTest1, EFTests" name="Context_Implements_An_Identity_Map" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="9ac7b849-3b69-6585-958e-d8afacdcc257" executionId="3b7e185e-a413-4fb1-b08e-f76c41b96eab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="3b7e185e-a413-4fb1-b08e-f76c41b96eab" testId="9ac7b849-3b69-6585-958e-d8afacdcc257" testName="Context_Implements_An_Identity_Map" computerName="BITQUAD" duration="00:00:16.3310000" startTime="2008-12-01T13:24:50.5917957-05:00" endTime="2008-12-01T13:25:06.9227957-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+    </UnitTestResult>
+  </Results>
+</TestRun>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="28c20982-cb84-40b1-84d0-f64ea84d8163" name="bitmask@BITQUAD 2008-12-01 13:32:24" runUser="bitQuad\bitmask" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Local Test Run" id="0a227923-3949-46e0-949b-83c1bd7f48cd">
+    <Description>This is a default test run configuration for a local test run.</Description>
+    <Deployment runDeploymentRoot="c:\temp\linq-entityframework-part1\TestResults\bitmask_BITQUAD 2008-12-01 13_32_24">
+      <DeploymentItem filename="c:\temp\linq-entityframework-part1\bin\Debug\linq-entityframework-part1.exe" />
+    </Deployment>
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2008-12-01T13:32:24.2347957-05:00" queuing="2008-12-01T13:32:26.2537957-05:00" start="2008-12-01T13:32:26.3937957-05:00" finish="2008-12-01T13:32:27.4577957-05:00" />
+  <TestDefinitions>
+    <UnitTest name="Each_Context_Has_Distinct_Identity_Map" storage="c:\temp\eftests\bin\debug\eftests.dll" id="eb0a2063-9a08-46eb-c974-98cf2d10d73f">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="f6dca021-38d1-423a-a0e8-cbf1aef776b2" />
+      <TestMethod codeBase="c:\temp\EFTests\bin\Debug\EFTests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="EFTests.UnitTest1, EFTests" name="Each_Context_Has_Distinct_Identity_Map" />
+    </UnitTest>
+    <UnitTest name="Context_Implements_An_Identity_Map" storage="c:\temp\eftests\bin\debug\eftests.dll" id="9ac7b849-3b69-6585-958e-d8afacdcc257">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="94330d63-856c-4aa1-b7a9-34db8ce5bc0f" />
+      <TestMethod codeBase="c:\temp\EFTests\bin\Debug\EFTests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="EFTests.UnitTest1, EFTests" name="Context_Implements_An_Identity_Map" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="9ac7b849-3b69-6585-958e-d8afacdcc257" executionId="94330d63-856c-4aa1-b7a9-34db8ce5bc0f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="eb0a2063-9a08-46eb-c974-98cf2d10d73f" executionId="f6dca021-38d1-423a-a0e8-cbf1aef776b2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="94330d63-856c-4aa1-b7a9-34db8ce5bc0f" testId="9ac7b849-3b69-6585-958e-d8afacdcc257" testName="Context_Implements_An_Identity_Map" computerName="BITQUAD" duration="00:00:00.3584526" startTime="2008-12-01T13:32:26.4517957-05:00" endTime="2008-12-01T13:32:27.2577957-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f6dca021-38d1-423a-a0e8-cbf1aef776b2" testId="eb0a2063-9a08-46eb-c974-98cf2d10d73f" testName="Each_Context_Has_Distinct_Identity_Map" computerName="BITQUAD" duration="00:00:00.1057896" startTime="2008-12-01T13:32:27.2607957-05:00" endTime="2008-12-01T13:32:27.3707957-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

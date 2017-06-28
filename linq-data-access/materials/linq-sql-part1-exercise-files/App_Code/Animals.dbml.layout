@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Animals">
+  <DataContextMoniker Name="/AnimalsDataContext" />
+  <nestedChildShapes>
+    <classShape Id="aaeb4a92-5c17-4036-85a8-bb3ffc3f17a6" absoluteBounds="2.5, 0.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/AnimalsDataContext/Animal" />
+      <nestedChildShapes>
+        <elementListCompartment Id="14cbcb44-5431-44d9-a2a6-4e365639289e" absoluteBounds="2.515, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1daae24c-5830-46ba-9e16-aa75197b75ff" absoluteBounds="1.125, 2.875, 2, 1.0016910807291666">
+      <DataClassMoniker Name="/AnimalsDataContext/Dog" />
+      <nestedChildShapes>
+        <elementListCompartment Id="088be2d4-960f-477e-bf74-726994e32170" absoluteBounds="1.1400000000000001, 3.335, 1.9700000000000002, 0.44169108072916669" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e86121d4-c811-47e8-9f3b-f94520eea19c" absoluteBounds="4.375, 2.875, 2, 1.0016910807291666">
+      <DataClassMoniker Name="/AnimalsDataContext/Cat" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6ab0d992-e665-4053-bf04-e2c0e4da068c" absoluteBounds="4.3900000000000006, 3.335, 1.9700000000000002, 0.44169108072916669" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <inheritanceConnector edgePoints="[(3.5 : 2.1362939453125); (3.5 : 2.5); (2.125 : 2.5); (2.125 : 2.875)]" fixedFrom="NotFixed" fixedTo="NotFixed" TargetRelationshipDomainClassId="7a7fe09e-e9ef-4b01-9ff3-bde95e827b62">
+      <nodes>
+        <classShapeMoniker Id="aaeb4a92-5c17-4036-85a8-bb3ffc3f17a6" />
+        <classShapeMoniker Id="1daae24c-5830-46ba-9e16-aa75197b75ff" />
+      </nodes>
+    </inheritanceConnector>
+    <inheritanceConnector edgePoints="[(3.5 : 2.1362939453125); (3.5 : 2.5); (5.375 : 2.5); (5.375 : 2.875)]" fixedFrom="NotFixed" fixedTo="NotFixed" TargetRelationshipDomainClassId="7a7fe09e-e9ef-4b01-9ff3-bde95e827b62">
+      <nodes>
+        <classShapeMoniker Id="aaeb4a92-5c17-4036-85a8-bb3ffc3f17a6" />
+        <classShapeMoniker Id="e86121d4-c811-47e8-9f3b-f94520eea19c" />
+      </nodes>
+    </inheritanceConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

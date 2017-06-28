@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MovieReviews.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="MovieReviewsStoreContainer">
+          <EntitySet Name="movies" EntityType="MovieReviews.Store.movies" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="reviews" EntityType="MovieReviews.Store.reviews" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="fk_reviews_movies" Association="MovieReviews.Store.fk_reviews_movies">
+            <End Role="movies" EntitySet="movies" />
+            <End Role="reviews" EntitySet="reviews" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="movies">
+          <Key>
+            <PropertyRef Name="movie_id" />
+          </Key>
+          <Property Name="movie_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="release_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reviews">
+          <Key>
+            <PropertyRef Name="review_id" />
+          </Key>
+          <Property Name="review_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="movie_id" Type="int" Nullable="false" />
+          <Property Name="summary" Type="varchar" Nullable="false" MaxLength="64" />
+          <Property Name="rating" Type="int" Nullable="false" />
+          <Property Name="review" Type="nvarchar" Nullable="false" MaxLength="512" />
+          <Property Name="reviewer" Type="nvarchar" MaxLength="64" />
+        </EntityType>
+        <Association Name="fk_reviews_movies">
+          <End Role="movies" Type="MovieReviews.Store.movies" Multiplicity="1" />
+          <End Role="reviews" Type="MovieReviews.Store.reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movies">
+              <PropertyRef Name="movie_id" />
+            </Principal>
+            <Dependent Role="reviews">
+              <PropertyRef Name="movie_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetHighestRankedMovies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SinceDate" Type="datetime" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MovieReviews" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="MovieReviewEntities">
+          <EntitySet Name="Movies" EntityType="MovieReviews.Movie" />
+          <EntitySet Name="Reviews" EntityType="MovieReviews.Review" />
+          <AssociationSet Name="fk_reviews_movies" Association="MovieReviews.fk_reviews_movies">
+            <End Role="movies" EntitySet="Movies" />
+            <End Role="reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <FunctionImport Name="GetHishestRankedMovies" EntitySet="Movies" ReturnType="Collection(MovieReviews.Movie)">
+            <Parameter Name="SinceDate" Mode="In" Type="DateTime" /></FunctionImport></EntityContainer>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
+          <Property Name="ReleaseDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Reviews" Relationship="MovieReviews.fk_reviews_movies" FromRole="movies" ToRole="reviews" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="summary" Type="String" Nullable="false" MaxLength="64" Unicode="false" FixedLength="false" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="review" Type="String" Nullable="false" MaxLength="512" Unicode="true" FixedLength="false" />
+          <Property Name="reviewer" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="movies" Relationship="MovieReviews.fk_reviews_movies" FromRole="reviews" ToRole="movies" />
+        </EntityType>
+        <Association Name="fk_reviews_movies">
+          <End Role="movies" Type="MovieReviews.Movie" Multiplicity="1" />
+          <End Role="reviews" Type="MovieReviews.Review" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="MovieReviewsStoreContainer" CdmEntityContainer="MovieReviewEntities">
+          <EntitySetMapping Name="Movies">
+            <EntityTypeMapping TypeName="IsTypeOf(MovieReviews.Movie)">
+              <MappingFragment StoreEntitySet="movies">
+                <ScalarProperty Name="ID" ColumnName="movie_id" />
+                <ScalarProperty Name="Title" ColumnName="title" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="release_date" />
+                </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="IsTypeOf(MovieReviews.Review)">
+              <MappingFragment StoreEntitySet="reviews">
+                <ScalarProperty Name="ID" ColumnName="review_id" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="Rating" ColumnName="rating" />
+                <ScalarProperty Name="review" ColumnName="review" />
+                <ScalarProperty Name="reviewer" ColumnName="reviewer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="fk_reviews_movies" TypeName="MovieReviews.fk_reviews_movies" StoreEntitySet="reviews">
+            <EndProperty Name="movies">
+              <ScalarProperty Name="ID" ColumnName="movie_id" />
+            </EndProperty>
+            <EndProperty Name="reviews">
+              <ScalarProperty Name="ID" ColumnName="review_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="GetHishestRankedMovies" FunctionName="MovieReviews.Store.GetHighestRankedMovies" /></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="MovieReviews">
+        <EntityTypeShape EntityType="MovieReviews.Movie" Width="1.5" PointX="1.375" PointY="3.5" Height="1.7879850260416668" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieReviews.Review" Width="1.5" PointX="5.125" PointY="3.5" Height="2.1725878906250005" IsExpanded="true" />
+        <AssociationConnector Association="MovieReviews.fk_reviews_movies" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.875" PointY="4.3939925130208337" />
+          <ConnectorPoint PointX="5.125" PointY="4.3939925130208337" />
+          </AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

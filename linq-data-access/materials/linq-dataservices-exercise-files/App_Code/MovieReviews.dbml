@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="moviereviews" Class="MovieReviewsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=moviereviews;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="moviereviewsConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.movies" Member="Movies">
+    <Type Name="Movie" Id="ID1">
+      <Column Name="movie_id" Member="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Member="Title" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="release_date" Member="ReleaseDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Movie_Review" Member="Reviews" ThisKey="ID" OtherKey="MovieID" Type="Review" />
+    </Type>
+  </Table>
+  <Table Name="dbo.reviews" Member="Reviews">
+    <Type Name="Review">
+      <Column Name="review_id" Member="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="movie_id" Member="MovieID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="summary" Member="Summary" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="rating" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="review" Member="review1" Type="System.String" DbType="NVarChar(512) NOT NULL" CanBeNull="false" />
+      <Column Name="reviewer" Type="System.String" DbType="NVarChar(64)" CanBeNull="true" />
+      <Association Name="Movie_Review" Member="Movie" ThisKey="MovieID" OtherKey="ID" Type="Movie" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.GetHighestRankedMovies" Method="GetHighestRankedMovies">
+    <Parameter Name="SinceDate" Parameter="sinceDate" Type="System.DateTime" DbType="DateTime" />
+    <ElementType IdRef="ID1" />
+  </Function>
+</Database>

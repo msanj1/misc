@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Modules xmlns:ext="http://pluralsight.com/Modules/Ext" xmlns="http://pluralsight.com/Modules">
+  <Module>Introduction to LINQ</Module>
+  <Module>LINQ and C#</Module>
+  <ext:Extra>Some content</ext:Extra>
+  <ext:Extra>Extra content</ext:Extra>
+</Modules>

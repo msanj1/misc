@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b1288dff-b3dc-4ec8-81ff-50fc724acbdf" xmlns="urn:schemas-microsoft-com:xml-dataservicemap">
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:15074/Web/MovieReviewService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.edmx" MetadataType="Edmx" ID="5abdae08-3a0b-469d-bb5d-dee460c5ba43" SourceId="1" SourceUrl="http://localhost:15074/Web/MovieReviewService.svc" />
+  </Metadata>
+  <Extensions />
+</ReferenceGroup>

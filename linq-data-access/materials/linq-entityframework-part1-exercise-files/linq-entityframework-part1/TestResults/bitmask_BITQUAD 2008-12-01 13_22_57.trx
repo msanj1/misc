@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="869319e4-5c13-4c48-b3d1-2ca4a1c75fb4" name="bitmask@BITQUAD 2008-12-01 13:22:57" runUser="bitQuad\bitmask" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Local Test Run" id="0a227923-3949-46e0-949b-83c1bd7f48cd">
+    <Description>This is a default test run configuration for a local test run.</Description>
+    <Deployment runDeploymentRoot="c:\temp\linq-entityframework-part1\TestResults\bitmask_BITQUAD 2008-12-01 13_22_57">
+      <DeploymentItem filename="c:\temp\linq-entityframework-part1\bin\Debug\linq-entityframework-part1.exe" />
+    </Deployment>
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2008-12-01T13:22:57.7897957-05:00" queuing="2008-12-01T13:22:58.9307957-05:00" start="2008-12-01T13:22:59.1377957-05:00" finish="2008-12-01T13:23:01.7567957-05:00" />
+  <TestDefinitions>
+    <UnitTest name="Context_Implements_An_Identity_Map" storage="c:\temp\eftests\bin\debug\eftests.dll" id="9ac7b849-3b69-6585-958e-d8afacdcc257">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="2f35f9ff-3960-4976-b72b-5cc29b16d300" />
+      <TestMethod codeBase="c:\temp\EFTests\bin\Debug\EFTests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="EFTests.UnitTest1, EFTests" name="Context_Implements_An_Identity_Map" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="9ac7b849-3b69-6585-958e-d8afacdcc257" executionId="2f35f9ff-3960-4976-b72b-5cc29b16d300" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="2f35f9ff-3960-4976-b72b-5cc29b16d300" testId="9ac7b849-3b69-6585-958e-d8afacdcc257" testName="Context_Implements_An_Identity_Map" computerName="BITQUAD" duration="00:00:00.4918978" startTime="2008-12-01T13:22:59.1817957-05:00" endTime="2008-12-01T13:23:00.1217957-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.IsTrue failed. </Message>
+          <StackTrace>   at EFTests.UnitTest1.Context_Implements_An_Identity_Map() in c:\temp\EFTests\UnitTest1.cs:line 30
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

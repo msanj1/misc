@@ -1,0 +1,38 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:DataServices>
+    <Schema Namespace="MovieReviewsModel" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+      <EntityContainer Name="MovieReviewEntities" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="Movies" EntityType="MovieReviewsModel.Movie" />
+        <EntitySet Name="Reviews" EntityType="MovieReviewsModel.Review" />
+        <AssociationSet Name="fk_reviews_movies" Association="MovieReviewsModel.fk_reviews_movies">
+          <End Role="movies" EntitySet="Movies" />
+          <End Role="reviews" EntitySet="Reviews" />
+        </AssociationSet>
+      </EntityContainer>
+      <EntityType Name="Movie">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" ConcurrencyMode="Fixed" />
+        <Property Name="ReleaseDate" Type="Edm.DateTime" Nullable="false" ConcurrencyMode="Fixed" />
+        <NavigationProperty Name="Reviews" Relationship="MovieReviewsModel.fk_reviews_movies" FromRole="movies" ToRole="reviews" />
+      </EntityType>
+      <EntityType Name="Review">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Summary" Type="Edm.String" Nullable="false" MaxLength="64" Unicode="false" FixedLength="false" />
+        <Property Name="Rating" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Body" Type="Edm.String" Nullable="false" MaxLength="512" Unicode="true" FixedLength="false" />
+        <Property Name="Reviewer" Type="Edm.String" Nullable="true" MaxLength="64" Unicode="true" FixedLength="false" />
+        <NavigationProperty Name="Movie" Relationship="MovieReviewsModel.fk_reviews_movies" FromRole="reviews" ToRole="movies" />
+      </EntityType>
+      <Association Name="fk_reviews_movies">
+        <End Role="movies" Type="MovieReviewsModel.Movie" Multiplicity="1" />
+        <End Role="reviews" Type="MovieReviewsModel.Review" Multiplicity="*" />
+      </Association>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
