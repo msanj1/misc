@@ -2,6 +2,8 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using System;
+using System.Reflection;
 using Fonetrak.IDP.Data;
 using Fonetrak.IDP.Models;
 using Microsoft.AspNetCore.Builder;
@@ -29,22 +31,13 @@ namespace Fonetrak.IDP
         {
             services.AddControllersWithViews();
 
-            // configures IIS out-of-proc settings (see https://github.com/aspnet/AspNetCore/issues/14882)
-            services.Configure<IISOptions>(iis =>
-            {
-                iis.AuthenticationDisplayName = "Windows";
-                iis.AutomaticAuthentication = false;
-            });
-
-            // configures IIS in-proc settings
-            services.Configure<IISServerOptions>(iis =>
-            {
-                iis.AuthenticationDisplayName = "Windows";
-                iis.AutomaticAuthentication = false;
-            });
-
+            var currentAssemblyName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"), sqlOptions =>
+                {
+                    sqlOptions.MigrationsAssembly(currentAssemblyName); //set migration context to this assembly
+                    sqlOptions.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null); 
+                }));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -57,23 +50,34 @@ namespace Fonetrak.IDP
                     options.Events.RaiseFailureEvents = true;
                     options.Events.RaiseSuccessEvents = true;
                 })
-                .AddInMemoryIdentityResources(Config.Ids)
-                .AddInMemoryApiResources(Config.Apis)
-                .AddInMemoryClients(Config.Clients)
                 .AddAspNetIdentity<ApplicationUser>();
+
+            builder.AddConfigurationStore(options =>
+            {
+                options.ConfigureDbContext = builder =>
+                {
+                    builder.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"), sqlOptions =>
+                    {
+                        sqlOptions.MigrationsAssembly(currentAssemblyName); //set migration context to this assembly
+                        sqlOptions.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
+                    });
+                };
+            });
+
+            builder.AddOperationalStore(options =>
+            {
+                options.ConfigureDbContext = builder =>
+                {
+                    builder.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"), sqlOptions =>
+                    {
+                        sqlOptions.MigrationsAssembly(currentAssemblyName); //set migration context to this assembly
+                        sqlOptions.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
+                    });
+                };
+            });
 
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
-
-            services.AddAuthentication()
-                .AddGoogle(options =>
-                {
-                    // register your IdentityServer with Google at https://console.developers.google.com
-                    // enable the Google+ API
-                    // set the redirect URI to http://localhost:5000/signin-google
-                    options.ClientId = "copy client ID from Google here";
-                    options.ClientSecret = "copy client secret from Google here";
-                });
         }
 
         public void Configure(IApplicationBuilder app)
@@ -83,6 +87,8 @@ namespace Fonetrak.IDP
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
+
+            SeedData.EnsureSeedData(app);
 
             app.UseStaticFiles();
 
