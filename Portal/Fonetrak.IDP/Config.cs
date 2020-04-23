@@ -20,7 +20,7 @@ namespace Fonetrak.IDP
         public static IEnumerable<ApiResource> Apis =>
             new ApiResource[]
             {
-                new ApiResource("api1", "My API #1")
+                //new ApiResource("api1", "My API #1")
             };
 
 
@@ -35,7 +35,6 @@ namespace Fonetrak.IDP
                     AllowOfflineAccess = true,
                     UpdateAccessTokenClaimsOnRefresh = true,
                     ClientName = "Self Service SPA Client",
-
                     ClientId = "selfservicespaclient",
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
