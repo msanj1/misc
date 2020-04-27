@@ -25,9 +25,8 @@ export class AuthService {
       scope: 'openid profile roles',
       response_type: 'code',
       post_logout_redirect_uri: `${environment.clientRoot}signout-callback`,
-      
-      // automaticSilentRenew: true,
-      // silent_redirect_uri: `${environment.clientRoot}silent-callback.html`
+      automaticSilentRenew: true,
+      silent_redirect_uri: `${environment.clientRoot}assets/silent-callback.html`
     };
     this._userManager = new UserManager(settings);
     this._userManager.events.addAccessTokenExpired(_ =>{
