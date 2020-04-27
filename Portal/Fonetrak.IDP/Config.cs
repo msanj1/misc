@@ -14,6 +14,12 @@ namespace Fonetrak.IDP
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
+                new IdentityResources.Address(),
+                new IdentityResource(
+                    "roles",
+                    "Your role(s)",
+                    new List<string>(){ "role" }
+                )
             };
 
 
@@ -31,33 +37,37 @@ namespace Fonetrak.IDP
                 new Client
                 {
                     //AccessTokenType = AccessTokenType.Reference,
-                    AccessTokenLifetime = 120,
-                    AllowOfflineAccess = true,
-                    UpdateAccessTokenClaimsOnRefresh = true,
+                    AccessTokenLifetime = 600, //10 minutes
+                    
+                    //AllowOfflineAccess = true,
+                    //UpdateAccessTokenClaimsOnRefresh = true,
+                    AllowAccessTokensViaBrowser = true,
                     ClientName = "Self Service SPA Client",
                     ClientId = "selfservicespaclient",
                     AllowedGrantTypes = GrantTypes.Code,
+                    RequireClientSecret = false,
                     RequirePkce = true,
+                    RequireConsent = false,
                     RedirectUris = new List<string>()
                     {
-                        "https://localhost:44389/signin-oidc"
+                        "http://localhost:4200/signin-callback","http://localhost:4200/assets/silent-callback.html"
                     },
                     PostLogoutRedirectUris = new List<string>(){
-                        "https://localhost:44389/signout-callback-oidc"
+                        "http://localhost:4200/signout-callback"
                     },
                     AllowedScopes = {
                         IdentityServer4.IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServer4.IdentityServerConstants.StandardScopes.Profile,
-                        //IdentityServer4.IdentityServerConstants.StandardScopes.Address,
-                        //"roles",
+                        IdentityServer4.IdentityServerConstants.StandardScopes.Address,
+                        "roles",
                         //"imagegalleryapi",
                         //"country",
                         //"subscriptionlevel"
                     },
-                    ClientSecrets =
-                    {
-                        new Secret("5elf5erv1c6".Sha256())
-                    }
+                    //ClientSecrets =
+                    //{
+                    //    new Secret("5elf5erv1c6".Sha256())
+                    //}
                 }
             };
     }

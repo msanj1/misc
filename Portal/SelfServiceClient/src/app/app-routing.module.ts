@@ -1,8 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { SigningRedirectCallbackComponent } from './home/signin-redirect-callback.components';
+import { SignoutRedirectCallbackComponent } from './home/singout-redirect-callback.components';
+import { UnAuthorizedComponent } from './home/unauthorized.component';
 
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path:'', component: HomeComponent },
+  { path:'signin-callback',component: SigningRedirectCallbackComponent },
+  { path:'signout-callback',component: SignoutRedirectCallbackComponent },
+  { path:'unauthorized',component: UnAuthorizedComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -27,7 +27,7 @@ namespace Fonetrak.IDP.Data
             using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
-                if (configuration["Environment:Seed"] == "true")
+                if (configuration["Environment:Seed"] == "True")
                 {
                     var applicationDbContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
 
@@ -40,10 +40,11 @@ namespace Fonetrak.IDP.Data
 
                     if (!configurationContext.Clients.Any())
                     {
-                        var clients = configuration.GetSection("Clients").Get<List<Client>>();
-
-                        foreach (var client in clients) configurationContext.Clients.Add(client.ToEntity());
-                        configurationContext.SaveChanges();
+                        foreach (var client in Config.Clients)
+                        {
+                            configurationContext.Clients.Add(client.ToEntity());
+                            configurationContext.SaveChanges();
+                        }
                     }
 
                     if (!configurationContext.IdentityResources.Any())

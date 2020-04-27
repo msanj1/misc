@@ -42,7 +42,19 @@ namespace Fonetrak.IDP
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-            
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", corsBuilder =>
+                {
+                    corsBuilder
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .SetIsOriginAllowed(origin => origin == "http://localhost:4200")
+                        .AllowCredentials();
+                });
+            });
+
             var builder = services.AddIdentityServer(options =>
                 {
                     options.Events.RaiseErrorEvents = true;
@@ -91,6 +103,7 @@ namespace Fonetrak.IDP
             SeedData.EnsureSeedData(app);
 
             app.UseStaticFiles();
+            app.UseCors("CorsPolicy");
 
             app.UseRouting();
             app.UseIdentityServer();
