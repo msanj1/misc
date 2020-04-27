@@ -40,7 +40,9 @@ namespace Fonetrak.IDP.Data
 
                     if (!configurationContext.Clients.Any())
                     {
-                        foreach (var client in Config.Clients)
+                        var clients = configuration.GetSection("Clients").Get<List<Client>>();
+
+                        foreach (var client in clients)
                         {
                             configurationContext.Clients.Add(client.ToEntity());
                             configurationContext.SaveChanges();

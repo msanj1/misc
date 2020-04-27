@@ -3,6 +3,7 @@
 
 
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Fonetrak.IDP.Data;
 using Fonetrak.IDP.Models;
@@ -42,7 +43,7 @@ namespace Fonetrak.IDP
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
+            
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", corsBuilder =>
@@ -50,7 +51,7 @@ namespace Fonetrak.IDP
                     corsBuilder
                         .AllowAnyHeader()
                         .AllowAnyMethod()
-                        .SetIsOriginAllowed(origin => origin == "http://localhost:4200")
+                        .WithOrigins(Configuration.GetSection("Cors:AllowedOrigins").Get<List<string>>().ToArray())
                         .AllowCredentials();
                 });
             });
