@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Fonetrak.IDP.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Fonetrak.IDP.Models;
 
-namespace Fonetrak.IDP.Data
+namespace Fonetrak.IDP.Data.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

@@ -11,6 +11,7 @@ const routes: Routes = [
   { path:'signin-callback',component: SigningRedirectCallbackComponent },
   { path:'signout-callback',component: SignoutRedirectCallbackComponent },
   { path:'unauthorized',component: UnAuthorizedComponent },
+  { path:'users',loadChildren:()=>import('./user/user.module').then(m => m.UserModule)},
 ];
 
 @NgModule({

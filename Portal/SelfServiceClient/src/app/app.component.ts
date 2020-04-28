@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../core/auth.service';
+import { AuthService } from './core/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +21,11 @@ export class AppComponent  implements OnInit {
     this._authService.isLoggedIn().then(loggedin => {
       this.isLoggedIn = loggedin;
     });
-  
+
+  }
+
+  isAdmin(){
+    return this._authService.authContext && this._authService.authContext.isAdmin;
   }
 
   login(){

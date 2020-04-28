@@ -6,7 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Fonetrak.IDP.Data;
-using Fonetrak.IDP.Models;
+using Fonetrak.IDP.Data.Data;
+using Fonetrak.IDP.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -33,10 +34,12 @@ namespace Fonetrak.IDP
             services.AddControllersWithViews();
 
             var currentAssemblyName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+            var dataAssemblyName = typeof(ApplicationDbContext).GetTypeInfo().Assembly.GetName().Name;
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"), sqlOptions =>
                 {
-                    sqlOptions.MigrationsAssembly(currentAssemblyName); //set migration context to this assembly
+                    sqlOptions.MigrationsAssembly(dataAssemblyName); //set migration context to this assembly
                     sqlOptions.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null); 
                 }));
 

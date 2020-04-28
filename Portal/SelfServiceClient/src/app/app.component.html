@@ -9,6 +9,10 @@
           <button *ngIf="isLoggedIn" mat-button routerLink="/projects">My Projects</button>
           <button *ngIf="isAdmin()" mat-button routerLink="/admin">Manage Projects</button>
       </span> -->
+       <span class="navbar-fill">
+          <button *ngIf="isAdmin()" mat-button routerLink="/users/manage">Manage Users</button>
+          <!-- <button *ngIf="isAdmin()" mat-button routerLink="/admin">Manage Projects</button> -->
+      </span>
       <span>
           <button *ngIf="!isLoggedIn" mat-button (click)="login()">Login</button>
           <button *ngIf="isLoggedIn" mat-button (click)="logout()">Logout</button>

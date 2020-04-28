@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Fonetrak.IDP.Migrations.ApplicationDb
+namespace Fonetrak.IDP.Data.Migrations.ApplicationDb
 {
     public partial class InitialApplicationContext2 : Migration
     {

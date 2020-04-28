@@ -9,8 +9,9 @@ import { HomeComponent } from './home/home.component';
 import { SigningRedirectCallbackComponent } from './home/signin-redirect-callback.components';
 import { SignoutRedirectCallbackComponent } from './home/singout-redirect-callback.components';
 import { UnAuthorizedComponent } from './home/unauthorized.component';
-import { CoreModule } from '../core/core.module';
-import { MaterialDesignModule } from '../material-design/material-design.module';
+import { CoreModule } from './core/core.module';
+import { MaterialDesignModule } from './material-design/material-design.module';
+
 
 @NgModule({
   declarations: [

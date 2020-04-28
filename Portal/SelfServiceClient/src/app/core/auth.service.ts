@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {UserManager, User, UserManagerSettings} from 'oidc-client';
 import { Subject } from 'rxjs';
-import { AuthContext } from '../app/model/auth-context';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { Constants } from '../app/constants';
+import { AuthContext } from '../model/auth-context';
+import { environment } from '../../environments/environment';
+import { Constants } from '../constants';
+import { SimpleClaim } from '../model/simple-claim';
+import { HttpClient } from '../../../node_modules/@angular/common/http';
 
 
 
@@ -49,10 +50,11 @@ export class AuthService {
       if(this._user !== user){
         this._loginChangedSubject.next(userIsCurrent);
       }
+      this._user = user;
       if(userIsCurrent && !this.authContext){
         this.loadSecurityContext();
       }
-      this._user = user;
+     
       return userIsCurrent;
      });
    }
@@ -91,5 +93,15 @@ export class AuthService {
 
   private loadSecurityContext(){
     //load security configurations for the current user
+    if(this._user)
+    {
+      let authContext = new AuthContext();
+      let roleClaim = new SimpleClaim();
+      roleClaim.type = 'role';
+      roleClaim.value = this._user.profile.role;
+      authContext.claims = [];
+      authContext.claims.push(roleClaim);
+      this.authContext = authContext;
+    }
   }   
 }
