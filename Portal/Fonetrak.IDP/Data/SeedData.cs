@@ -28,17 +28,18 @@ namespace Fonetrak.IDP.Data
             using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+                var applicationDbContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
+
+                var configurationContext = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+                var grantDbContext = scope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>();
+
+                grantDbContext.Database.Migrate();
+                applicationDbContext.Database.Migrate();
+                configurationContext.Database.Migrate();
+
                 if (configuration["Environment:Seed"] == "True")
                 {
-                    var applicationDbContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
-
-                    var configurationContext = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
                     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
-                    scope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
-                    applicationDbContext.Database.Migrate();
-                    configurationContext.Database.Migrate();
-
                     if (!configurationContext.Clients.Any())
                     {
                         var clients = configuration.GetSection("Clients").Get<List<Client>>();

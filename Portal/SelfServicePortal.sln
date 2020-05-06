@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fonetrak.IDP", "Fonetrak.IDP\Fonetrak.IDP.csproj", "{59C8B9A7-783B-42C7-B7B0-6C01212CBF75}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fonetrak.IDP.AdminApi", "Fonetrak.IDP.AdminApi\Fonetrak.IDP.AdminApi.csproj", "{49FF6DC4-7286-43BA-AC25-CA4E27CEF359}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fonetrak.IDP.Data", "Fonetrak.IDP.Data\Fonetrak.IDP.Data.csproj", "{7D328150-375A-4C9F-A14F-9CBE4D968B52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fonetrak.IDP.Data", "Fonetrak.IDP.Data\Fonetrak.IDP.Data.csproj", "{7D328150-375A-4C9F-A14F-9CBE4D968B52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fonetrak.UserManagement.API", "Fonetrak.UserManagement.API\Fonetrak.UserManagement.API.csproj", "{5865468A-B66D-4CD9-BB11-5C9E85891551}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IDP", "IDP", "{D55987BA-B5C6-46BF-A9CF-20FEDDF8AE7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,18 +33,6 @@ Global
 		{59C8B9A7-783B-42C7-B7B0-6C01212CBF75}.Release|x64.Build.0 = Release|Any CPU
 		{59C8B9A7-783B-42C7-B7B0-6C01212CBF75}.Release|x86.ActiveCfg = Release|Any CPU
 		{59C8B9A7-783B-42C7-B7B0-6C01212CBF75}.Release|x86.Build.0 = Release|Any CPU
-		{49FF6DC4-7286-43BA-AC25-CA4E27CEF359}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49FF6DC4-7286-43BA-AC25-CA4E27CEF359}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49FF6DC4-7286-43BA-AC25-CA4E27CEF359}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{49FF6DC4-7286-43BA-AC25-CA4E27CEF359}.Debug|x64.Build.0 = Debug|Any CPU
-		{49FF6DC4-7286-43BA-AC25-CA4E27CEF359}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{49FF6DC4-7286-43BA-AC25-CA4E27CEF359}.Debug|x86.Build.0 = Debug|Any CPU
-		{49FF6DC4-7286-43BA-AC25-CA4E27CEF359}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49FF6DC4-7286-43BA-AC25-CA4E27CEF359}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49FF6DC4-7286-43BA-AC25-CA4E27CEF359}.Release|x64.ActiveCfg = Release|Any CPU
-		{49FF6DC4-7286-43BA-AC25-CA4E27CEF359}.Release|x64.Build.0 = Release|Any CPU
-		{49FF6DC4-7286-43BA-AC25-CA4E27CEF359}.Release|x86.ActiveCfg = Release|Any CPU
-		{49FF6DC4-7286-43BA-AC25-CA4E27CEF359}.Release|x86.Build.0 = Release|Any CPU
 		{7D328150-375A-4C9F-A14F-9CBE4D968B52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7D328150-375A-4C9F-A14F-9CBE4D968B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D328150-375A-4C9F-A14F-9CBE4D968B52}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -55,9 +45,25 @@ Global
 		{7D328150-375A-4C9F-A14F-9CBE4D968B52}.Release|x64.Build.0 = Release|Any CPU
 		{7D328150-375A-4C9F-A14F-9CBE4D968B52}.Release|x86.ActiveCfg = Release|Any CPU
 		{7D328150-375A-4C9F-A14F-9CBE4D968B52}.Release|x86.Build.0 = Release|Any CPU
+		{5865468A-B66D-4CD9-BB11-5C9E85891551}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5865468A-B66D-4CD9-BB11-5C9E85891551}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5865468A-B66D-4CD9-BB11-5C9E85891551}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5865468A-B66D-4CD9-BB11-5C9E85891551}.Debug|x64.Build.0 = Debug|Any CPU
+		{5865468A-B66D-4CD9-BB11-5C9E85891551}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5865468A-B66D-4CD9-BB11-5C9E85891551}.Debug|x86.Build.0 = Debug|Any CPU
+		{5865468A-B66D-4CD9-BB11-5C9E85891551}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5865468A-B66D-4CD9-BB11-5C9E85891551}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5865468A-B66D-4CD9-BB11-5C9E85891551}.Release|x64.ActiveCfg = Release|Any CPU
+		{5865468A-B66D-4CD9-BB11-5C9E85891551}.Release|x64.Build.0 = Release|Any CPU
+		{5865468A-B66D-4CD9-BB11-5C9E85891551}.Release|x86.ActiveCfg = Release|Any CPU
+		{5865468A-B66D-4CD9-BB11-5C9E85891551}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{59C8B9A7-783B-42C7-B7B0-6C01212CBF75} = {D55987BA-B5C6-46BF-A9CF-20FEDDF8AE7D}
+		{5865468A-B66D-4CD9-BB11-5C9E85891551} = {D55987BA-B5C6-46BF-A9CF-20FEDDF8AE7D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FDE20725-DFB1-4EE8-AE44-D60A10ABE073}

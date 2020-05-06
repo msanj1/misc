@@ -34,12 +34,11 @@ namespace Fonetrak.IDP
             services.AddControllersWithViews();
 
             var currentAssemblyName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
-            var dataAssemblyName = typeof(ApplicationDbContext).GetTypeInfo().Assembly.GetName().Name;
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"), sqlOptions =>
                 {
-                    sqlOptions.MigrationsAssembly(dataAssemblyName); //set migration context to this assembly
+                    sqlOptions.MigrationsAssembly(currentAssemblyName); //set migration context to this assembly
                     sqlOptions.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null); 
                 }));
 
@@ -54,7 +53,7 @@ namespace Fonetrak.IDP
                     corsBuilder
                         .AllowAnyHeader()
                         .AllowAnyMethod()
-                        .WithOrigins(Configuration.GetSection("Cors:AllowedOrigins").Get<List<string>>().ToArray())
+                        .SetIsOriginAllowed(s=>true)
                         .AllowCredentials();
                 });
             });
