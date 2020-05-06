@@ -16,6 +16,8 @@ namespace Fonetrak.UserManagement.API.Profiles
             CreateMap<ApplicationUser, UserDto>();
             CreateMap<UserForRegistrationDto, UserDto>();
             CreateMap<UserForRegistrationDto, ApplicationUser>();
+            CreateMap<UserForUpdateDto, ApplicationUser>();
+            CreateMap<ApplicationUser, UserForUpdateDto>();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Fonetrak.UserManagement.API.Models
 {
-    public class ClaimForRegistrationDto : ClaimForManipulationDto
+    public class ClaimForUpdateDto : ClaimForManipulationDto
     {
     }
 }

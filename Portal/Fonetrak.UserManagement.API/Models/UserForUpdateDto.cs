@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace Fonetrak.UserManagement.API.Models
 {
-    public class UserDto
+    public class UserForUpdateDto : UserForManipulationDto
     {
-        public string Id { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
+        public List<ClaimForUpdateDto> Claims { get; set; } = new List<ClaimForUpdateDto>();
         public bool Active { get; set; }
+
     }
 }

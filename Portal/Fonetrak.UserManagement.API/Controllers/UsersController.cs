@@ -9,6 +9,7 @@ using Fonetrak.UserManagement.API.Models;
 using Fonetrak.UserManagement.API.Services;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
@@ -71,6 +72,72 @@ namespace Fonetrak.UserManagement.API.Controllers
             var userDto = _mapper.Map<UserDto>(userEntity);
 
             return CreatedAtRoute("GetUser", new { userId = userEntity.Id }, userDto);
+        }
+
+        [HttpPatch("{userId}")]
+        public async Task<IActionResult> PartiallyUpdateUser(string userId,
+            JsonPatchDocument<UserForUpdateDto> patchDocument)
+        {
+            var userEntity = await _userRepository.GetUserAsync(userId);
+            if (userEntity == null)
+            {
+                return NotFound();
+            }
+
+            var userClaimsEntity = await _userRepository.GetClaimsAsync(userEntity);
+
+            var userToUpdateDto = _mapper.Map<UserForUpdateDto>(userEntity);
+            userToUpdateDto.Claims = _mapper.Map<List<ClaimForUpdateDto>>(userClaimsEntity);
+
+            patchDocument.ApplyTo(userToUpdateDto,ModelState);
+
+            if (!TryValidateModel(!TryValidateModel(userToUpdateDto)))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            var userToUpdate = _mapper.Map(userToUpdateDto, userEntity);
+            var claimsToUpdate = _mapper.Map<List<Claim>>(userToUpdateDto.Claims);
+
+            var possibleErrors = await _userRepository.UpdateUser(userToUpdate,claimsToUpdate);
+            if (possibleErrors.Count > 0)
+            {
+                foreach (var validationError in possibleErrors)
+                {
+                    ModelState.AddModelError("", validationError);
+                }
+
+                return ValidationProblem(ModelState);
+            }
+
+            var userDto = _mapper.Map<UserDto>(userToUpdate);
+
+            return CreatedAtRoute("GetUser", new { userId = userEntity.Id }, userDto);
+        }
+
+        [HttpDelete("{userId}")]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            var userEntity = await _userRepository.GetUserAsync(userId);
+            if (userEntity == null)
+            {
+                return NotFound();
+            }
+
+            var possibleErrors = await _userRepository.DeleteUser(userEntity);
+            if (possibleErrors.Count > 0)
+            {
+                foreach (var validationError in possibleErrors)
+                {
+                    ModelState.AddModelError("", validationError);
+                }
+
+                return ValidationProblem(ModelState);
+            }
+
+            _userRepository.Save();
+
+            return NoContent();
         }
     }
 }

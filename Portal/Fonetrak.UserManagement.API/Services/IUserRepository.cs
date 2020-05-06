@@ -11,7 +11,11 @@ namespace Fonetrak.UserManagement.API.Services
         IEnumerable<ApplicationUser> GetUsers();
         Task<ApplicationUser> GetUserAsync(string id);
         Task<List<string>> AddUser(ApplicationUser user, List<Claim> claims, string password);
+        Task<List<string>> UpdateUser(ApplicationUser user, List<Claim> claims);
+        Task<List<string>> DeleteUser(ApplicationUser user);
         Task<IEnumerable<Claim>> GetClaimsAsync(ApplicationUser user);
+        Task<List<string>> DeleteClaims(ApplicationUser user);
+        Task<List<string>> AddClaim(ApplicationUser user, Claim claim);
         void Save();
     }
 }

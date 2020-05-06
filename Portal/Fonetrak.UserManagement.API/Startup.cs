@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using Fonetrak.IDP.Data.Data;
@@ -12,14 +9,12 @@ using Fonetrak.UserManagement.API.Validators;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 
 namespace Fonetrak.UserManagement.API
 {
@@ -35,10 +30,16 @@ namespace Fonetrak.UserManagement.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(setupAction =>
+                {
+                    setupAction.SerializerSettings.ContractResolver =
+                        new CamelCasePropertyNamesContractResolver();
+                });
+
             services.AddMvc()
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UserForRegistrationDtoValidator>());
-                
+                .AddFluentValidation(fv =>
+                    fv.RegisterValidatorsFromAssemblyContaining<UserForRegistrationDtoValidator>());
 
             var dataAssemblyName = typeof(ApplicationDbContext).GetTypeInfo().Assembly.GetName().Name;
 
@@ -49,10 +50,7 @@ namespace Fonetrak.UserManagement.API
                     sqlOptions.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
                 }));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-                {
-                    options.Password.RequiredLength = 8;
-                })
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => { options.Password.RequiredLength = 8; })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -66,7 +64,7 @@ namespace Fonetrak.UserManagement.API
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
             else
-                app.UseExceptionHandler(async appBuilder =>
+                app.UseExceptionHandler(appBuilder =>
                 {
                     appBuilder.Run(async context =>
                     {
@@ -83,10 +81,7 @@ namespace Fonetrak.UserManagement.API
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }
