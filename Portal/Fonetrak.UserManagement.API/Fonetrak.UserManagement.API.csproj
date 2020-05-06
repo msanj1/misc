@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Fonetrak.IDP.Data\Fonetrak.IDP.Data.csproj" />
+    <ProjectReference Include="..\Fonetrak.Web.Common\Fonetrak.Web.Common.csproj" />
   </ItemGroup>
 
 

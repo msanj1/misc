@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Fonetrak.IDP.Data.Data;
 using Fonetrak.IDP.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -15,17 +16,25 @@ namespace Fonetrak.UserManagement.API.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<UserRepository> _logger;
+        private readonly ApplicationDbContext _context;
 
         public UserRepository(UserManager<ApplicationUser> userManager,
-            ILogger<UserRepository> logger)
+            ILogger<UserRepository> logger,
+            ApplicationDbContext context)
         {
             _userManager = userManager ?? throw new ArgumentException(nameof(userManager));
-            _logger = logger ?? throw new ArgumentNullException(nameof(userManager));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _context = context ?? throw new ArgumentNullException(nameof(context)); ;
         }
 
         public IEnumerable<ApplicationUser> GetUsers()
         {
             return _userManager.Users;
+        }
+
+        public IEnumerable<ApplicationUser> GetUsers(IEnumerable<string> ids)
+        {
+            return _userManager.Users.Where(u => ids.Contains(u.Id));
         }
 
         public async Task<ApplicationUser> GetUserAsync(string id)

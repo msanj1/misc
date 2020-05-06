@@ -11,5 +11,6 @@ namespace Fonetrak.UserManagement.API.Models
         public string UserName { get; set; }
         public string Email { get; set; }
         public bool Active { get; set; }
+        //public List<ClaimDto> Claims { get; set; } = new List<ClaimDto>();
     }
 }

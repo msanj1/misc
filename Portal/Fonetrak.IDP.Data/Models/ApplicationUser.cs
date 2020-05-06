@@ -8,5 +8,16 @@ namespace Fonetrak.IDP.Data.Models
     {
         [Required]
         public bool Active { get; set; }
+
+        //[Required]
+        //[MaxLength(150)]
+        //public string FirstName { get; set; }
+
+        //[Required]
+        //[MaxLength(150)]
+        //public string LastName { get; set; }
+
+        //[MaxLength(200)]
+        //public string TimeZone { get; set; }
     }
 }

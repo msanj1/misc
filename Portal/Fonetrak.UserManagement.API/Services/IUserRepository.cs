@@ -9,6 +9,7 @@ namespace Fonetrak.UserManagement.API.Services
     public interface IUserRepository
     {
         IEnumerable<ApplicationUser> GetUsers();
+        IEnumerable<ApplicationUser> GetUsers(IEnumerable<string> ids);
         Task<ApplicationUser> GetUserAsync(string id);
         Task<List<string>> AddUser(ApplicationUser user, List<Claim> claims, string password);
         Task<List<string>> UpdateUser(ApplicationUser user, List<Claim> claims);
