@@ -3,12 +3,14 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Fonetrak.IDP.Data.Models;
+using Fonetrak.UserManagement.API.ResourceParameters;
+using Fonetrak.Web.Common.Helpers;
 
 namespace Fonetrak.UserManagement.API.Services
 {
     public interface IUserRepository
     {
-        IEnumerable<ApplicationUser> GetUsers();
+        PagedList<ApplicationUser> GetUsers(UsersResourceParameters parameters);
         IEnumerable<ApplicationUser> GetUsers(IEnumerable<string> ids);
         Task<ApplicationUser> GetUserAsync(string id);
         Task<List<string>> AddUser(ApplicationUser user, List<Claim> claims, string password);

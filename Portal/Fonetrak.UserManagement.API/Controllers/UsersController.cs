@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.Json;
 using System.Threading.Tasks;
 using AutoMapper;
 using Fonetrak.IDP.Data.Models;
 using Fonetrak.UserManagement.API.Models;
+using Fonetrak.UserManagement.API.ResourceParameters;
 using Fonetrak.UserManagement.API.Services;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
@@ -29,10 +31,34 @@ namespace Fonetrak.UserManagement.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public IActionResult GetUsers()
+        [HttpGet(Name = "GetUsers")]
+        public IActionResult GetUsers([FromQuery] UsersResourceParameters parameters)
         {
-            var usersDto = _mapper.Map<IEnumerable<UserDto>>(_userRepository.GetUsers());
+            var usersToReturn = _userRepository.GetUsers(parameters);
+            var paginationMetadata = new
+            {
+                totalCount = usersToReturn.TotalCount,
+                pageSize = usersToReturn.PageSize,
+                currentPage = usersToReturn.CurrentPage,
+                totalPages = usersToReturn.TotalPages,
+                perviousPage = usersToReturn.HasPrevious ? Url.Link("GetUsers",
+                    new
+                    {
+                        pageNumber = parameters.PageNumber - 1,
+                        pageSize = parameters.PageSize
+                    }) : null,
+                nextPage = usersToReturn.HasNext ? Url.Link("GetUsers",
+                    new
+                    {
+                        pageNumber = parameters.PageNumber + 1,
+                        pageSize = parameters.PageSize
+                    }) : null
+            };
+
+            Response.Headers.Add("X-Pagination",
+                JsonSerializer.Serialize(paginationMetadata));
+
+            var usersDto = _mapper.Map<IEnumerable<UserDto>>(usersToReturn);
             return Ok(usersDto);
         }
 
@@ -139,5 +165,6 @@ namespace Fonetrak.UserManagement.API.Controllers
 
             return NoContent();
         }
+
     }
 }

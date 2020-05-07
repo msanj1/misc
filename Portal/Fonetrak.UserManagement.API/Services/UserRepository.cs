@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Fonetrak.IDP.Data.Data;
 using Fonetrak.IDP.Data.Models;
+using Fonetrak.UserManagement.API.ResourceParameters;
+using Fonetrak.Web.Common.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -27,9 +29,10 @@ namespace Fonetrak.UserManagement.API.Services
             _context = context ?? throw new ArgumentNullException(nameof(context)); ;
         }
 
-        public IEnumerable<ApplicationUser> GetUsers()
+        public PagedList<ApplicationUser> GetUsers(UsersResourceParameters parameters)
         {
-            return _userManager.Users;
+            return PagedList<ApplicationUser>.Create(_userManager.Users,
+                parameters.PageNumber, parameters.PageSize);
         }
 
         public IEnumerable<ApplicationUser> GetUsers(IEnumerable<string> ids)
