@@ -50,6 +50,20 @@ namespace Fonetrak.UserManagement.API.Services
             return await _userManager.GetClaimsAsync(user);
         }
 
+        public async Task<List<string>> ResetPasswordAsync(ApplicationUser user, string newPassword)
+        {
+            List<string> errorMessages = new List<string>();
+
+            user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, newPassword);
+            var operationResult = await _userManager.UpdateAsync(user);
+            foreach (var error in operationResult.Errors)
+            {
+                errorMessages.Add(error.Description);
+            }
+
+            return errorMessages;
+        }
+
         public async Task<List<string>> DeleteClaimsAsync(ApplicationUser user)
         {
             List<string> errorMessages = new List<string>();

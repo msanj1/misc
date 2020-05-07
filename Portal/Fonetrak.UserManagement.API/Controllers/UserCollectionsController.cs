@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Fonetrak.UserManagement.API.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/usercollections")]
+    [Route("api/usercollections")]
     [ApiController]
     public class UserCollectionsController : ControllerBase
     {
