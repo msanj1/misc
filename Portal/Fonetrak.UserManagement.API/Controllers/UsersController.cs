@@ -82,7 +82,7 @@ namespace Fonetrak.UserManagement.API.Controllers
             var userEntity = _mapper.Map<ApplicationUser>(user);
             var claimEntities = _mapper.Map<List<Claim>>(user.Claims);
             
-            var possibleErrors = await _userRepository.AddUser(userEntity, claimEntities, user.Password);
+            var possibleErrors = await _userRepository.AddUserAsync(userEntity, claimEntities, user.Password);
             if (possibleErrors.Count > 0)
             {
                 foreach (var validationError in possibleErrors)
@@ -93,7 +93,7 @@ namespace Fonetrak.UserManagement.API.Controllers
                 return ValidationProblem(ModelState);
             }
 
-            _userRepository.Save();
+            await _userRepository.SaveAsync();
 
             var userDto = _mapper.Map<UserDto>(userEntity);
 
@@ -125,7 +125,7 @@ namespace Fonetrak.UserManagement.API.Controllers
             var userToUpdate = _mapper.Map(userToUpdateDto, userEntity);
             var claimsToUpdate = _mapper.Map<List<Claim>>(userToUpdateDto.Claims);
 
-            var possibleErrors = await _userRepository.UpdateUser(userToUpdate,claimsToUpdate);
+            var possibleErrors = await _userRepository.UpdateUserAsync(userToUpdate,claimsToUpdate);
             if (possibleErrors.Count > 0)
             {
                 foreach (var validationError in possibleErrors)
@@ -135,6 +135,8 @@ namespace Fonetrak.UserManagement.API.Controllers
 
                 return ValidationProblem(ModelState);
             }
+
+            await _userRepository.SaveAsync();
 
             var userDto = _mapper.Map<UserDto>(userToUpdate);
 
@@ -150,7 +152,7 @@ namespace Fonetrak.UserManagement.API.Controllers
                 return NotFound();
             }
 
-            var possibleErrors = await _userRepository.DeleteUser(userEntity);
+            var possibleErrors = await _userRepository.DeleteUserAsync(userEntity);
             if (possibleErrors.Count > 0)
             {
                 foreach (var validationError in possibleErrors)
@@ -161,7 +163,7 @@ namespace Fonetrak.UserManagement.API.Controllers
                 return ValidationProblem(ModelState);
             }
 
-            _userRepository.Save();
+            await _userRepository.SaveAsync();
 
             return NoContent();
         }

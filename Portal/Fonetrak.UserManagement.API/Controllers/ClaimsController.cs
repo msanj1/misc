@@ -49,7 +49,7 @@ namespace Fonetrak.UserManagement.API.Models
 
             var claimToAdd = _mapper.Map<Claim>(claim);
 
-            var possibleErrors = await _userRepository.AddClaim(userEntity, claimToAdd);
+            var possibleErrors = await _userRepository.AddClaimAsync(userEntity, claimToAdd);
             if (possibleErrors.Count > 0)
             {
                 foreach (var validationError in possibleErrors)
@@ -59,6 +59,8 @@ namespace Fonetrak.UserManagement.API.Models
 
                 return ValidationProblem(ModelState);
             }
+
+            await _userRepository.SaveAsync();
 
             var claimDto = _mapper.Map<Claim>(claimToAdd);
             return Ok(claimDto);
@@ -73,7 +75,7 @@ namespace Fonetrak.UserManagement.API.Models
                 return NotFound();
             }
 
-            var possibleErrors = await _userRepository.DeleteClaims(userEntity);
+            var possibleErrors = await _userRepository.DeleteClaimsAsync(userEntity);
             if (possibleErrors.Count > 0)
             {
                 foreach (var validationError in possibleErrors)
@@ -84,7 +86,7 @@ namespace Fonetrak.UserManagement.API.Models
                 return ValidationProblem(ModelState);
             }
 
-            _userRepository.Save();
+            await _userRepository.SaveAsync();
 
             return NoContent();
         }

@@ -48,10 +48,9 @@ namespace Fonetrak.UserManagement.API.Services
         public async Task<IEnumerable<Claim>> GetClaimsAsync(ApplicationUser user)
         {
             return await _userManager.GetClaimsAsync(user);
-            //_userManager.up
         }
 
-        public async Task<List<string>> DeleteClaims(ApplicationUser user)
+        public async Task<List<string>> DeleteClaimsAsync(ApplicationUser user)
         {
             List<string> errorMessages = new List<string>();
             var claims = await _userManager.GetClaimsAsync(user);
@@ -64,11 +63,10 @@ namespace Fonetrak.UserManagement.API.Services
             return errorMessages;
         }
 
-        public async Task<List<string>> DeleteUser(ApplicationUser user)
+        public async Task<List<string>> DeleteUserAsync(ApplicationUser user)
         {
             List<string> errorMessages = new List<string>();
             var operationResult = await _userManager.DeleteAsync(user);
-            //var operationResult = await _userManager.RemoveClaimsAsync(user, claims);
             foreach (var error in operationResult.Errors)
             {
                 errorMessages.Add(error.Description);
@@ -77,7 +75,7 @@ namespace Fonetrak.UserManagement.API.Services
             return errorMessages;
         }
 
-        public async Task<List<string>> UpdateUser(ApplicationUser user, List<Claim> claims)
+        public async Task<List<string>> UpdateUserAsync(ApplicationUser user, List<Claim> claims)
         {
             List<string> errorMessages = new List<string>();
 
@@ -99,7 +97,7 @@ namespace Fonetrak.UserManagement.API.Services
             return errorMessages;
         }
 
-        public async Task<List<string>> AddUser(ApplicationUser user, List<Claim> claims, string password)
+        public async Task<List<string>> AddUserAsync(ApplicationUser user, List<Claim> claims, string password)
         {
             List<string> errorMessages = new List<string>();
             user.Active = true;
@@ -122,7 +120,7 @@ namespace Fonetrak.UserManagement.API.Services
             return errorMessages;
         }
 
-        public async Task<List<string>> AddClaim(ApplicationUser user, Claim claim)
+        public async Task<List<string>> AddClaimAsync(ApplicationUser user, Claim claim)
         {
             List<string> errorMessages = new List<string>();
             var operationResult = await _userManager.RemoveClaimAsync(user, claim);
@@ -132,35 +130,10 @@ namespace Fonetrak.UserManagement.API.Services
             return errorMessages;
         }
 
-        //public async Task<List<string>> ValidatePasswordAsync(ApplicationUser user, string password)
-        //{
-        //    List<string> errors = new List<string>();
-        //    foreach (var validator in _userManager.PasswordValidators)
-        //    {
-        //        var result = await validator.ValidateAsync(_userManager, user, password);
-        //        foreach (var error in result.Errors)
-        //        {
-        //            errors.Add(error.Description);
-        //        }
-        //    }
-
-        //    foreach (var validator in _userManager.UserValidators)
-        //    {
-        //        var result = await validator.ValidateAsync(_userManager, user);
-        //        foreach (var error in result.Errors)
-        //        {
-        //            errors.Add(error.Description);
-        //        }
-        //    }
-
-        //    return errors;
-        //}
-
-        //public async Task<Claim> GetClaims
-
-        public void Save()
+        public Task SaveAsync()
         {
             //Do Nothing
+            return Task.FromResult(0);
         }
     }
 }

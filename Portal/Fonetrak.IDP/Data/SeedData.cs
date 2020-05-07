@@ -71,7 +71,8 @@ namespace Fonetrak.IDP.Data
                         {
                             Id = Guid.NewGuid().ToString(),
                             UserName = "Development",
-                            Email = "foneboxdevelopmentteam@fonebox.com.au"
+                            Email = "foneboxdevelopmentteam@fonebox.com.au",
+                            Active = true
                         };
                         var seedPassword = configuration.GetSection("Seed:RootPassword").Get<string>();
                         developmentUser.PasswordHash = passwordHasher.HashPassword(developmentUser, seedPassword);
@@ -80,8 +81,8 @@ namespace Fonetrak.IDP.Data
                         userManager.AddClaimsAsync(developmentUser, new List<Claim>
                         {
                             new Claim(JwtClaimTypes.GivenName, "Development"),
-                            new Claim(JwtClaimTypes.FamilyName, ""),
-                            new Claim(JwtClaimTypes.Address, "300 Adelaide st, Brisbane City QLD 4000"),
+                            new Claim(JwtClaimTypes.FamilyName, "User"),
+                            new Claim(JwtClaimTypes.ZoneInfo, "E. Australia Standard Time"),
                             new Claim(JwtClaimTypes.Role, "SysAdmin")
                         }).Wait();
 
@@ -89,7 +90,8 @@ namespace Fonetrak.IDP.Data
                         {
                             Id = Guid.NewGuid().ToString(),
                             UserName = "John",
-                            Email = "foneboxdevelopmentteam@fonebox.com.au"
+                            Email = "foneboxdevelopmentteam@fonebox.com.au",
+                            Active = true
                         };
                         normalUser.PasswordHash = passwordHasher.HashPassword(normalUser, seedPassword);
 
@@ -98,7 +100,7 @@ namespace Fonetrak.IDP.Data
                         {
                             new Claim(JwtClaimTypes.GivenName, "John"),
                             new Claim(JwtClaimTypes.FamilyName, "Doe"),
-                            new Claim(JwtClaimTypes.Address, "300 Adelaide st, Brisbane City QLD 4000"),
+                            new Claim(JwtClaimTypes.ZoneInfo, "AUS Eastern Standard Time"),
                             new Claim(JwtClaimTypes.Role, "Admin")
                         }).Wait();
                     }

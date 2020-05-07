@@ -13,12 +13,12 @@ namespace Fonetrak.UserManagement.API.Services
         PagedList<ApplicationUser> GetUsers(UsersResourceParameters parameters);
         IEnumerable<ApplicationUser> GetUsers(IEnumerable<string> ids);
         Task<ApplicationUser> GetUserAsync(string id);
-        Task<List<string>> AddUser(ApplicationUser user, List<Claim> claims, string password);
-        Task<List<string>> UpdateUser(ApplicationUser user, List<Claim> claims);
-        Task<List<string>> DeleteUser(ApplicationUser user);
+        Task<List<string>> AddUserAsync(ApplicationUser user, List<Claim> claims, string password);
+        Task<List<string>> UpdateUserAsync(ApplicationUser user, List<Claim> claims);
+        Task<List<string>> DeleteUserAsync(ApplicationUser user);
         Task<IEnumerable<Claim>> GetClaimsAsync(ApplicationUser user);
-        Task<List<string>> DeleteClaims(ApplicationUser user);
-        Task<List<string>> AddClaim(ApplicationUser user, Claim claim);
-        void Save();
+        Task<List<string>> DeleteClaimsAsync(ApplicationUser user);
+        Task<List<string>> AddClaimAsync(ApplicationUser user, Claim claim);
+        Task SaveAsync();
     }
 }
