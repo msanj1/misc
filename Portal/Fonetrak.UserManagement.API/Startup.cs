@@ -6,6 +6,7 @@ using Fonetrak.IDP.Data.Data;
 using Fonetrak.IDP.Data.Models;
 using Fonetrak.UserManagement.API.Services;
 using Fonetrak.UserManagement.API.Validators;
+using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -30,17 +31,20 @@ namespace Fonetrak.UserManagement.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers()
+            services.AddHttpCacheHeaders();
+
+            services.AddControllers(setupAction =>
+                {
+                    setupAction.ReturnHttpNotAcceptable = true;
+                })
                 .AddNewtonsoftJson(setupAction =>
                 {
                     setupAction.SerializerSettings.ContractResolver =
                         new CamelCasePropertyNamesContractResolver();
-                });
-
-            services.AddMvc()
+                })
                 .AddFluentValidation(fv =>
-                    fv.RegisterValidatorsFromAssemblyContaining<UserForRegistrationDtoValidator>());
-
+                    fv.RegisterValidatorsFromAssemblyContaining<UserForRegistrationDtoValidator>()); ;
+              
             var dataAssemblyName = typeof(ApplicationDbContext).GetTypeInfo().Assembly.GetName().Name;
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -75,6 +79,8 @@ namespace Fonetrak.UserManagement.API
                 });
 
             app.UseHttpsRedirection();
+
+            app.UseHttpCacheHeaders();
 
             app.UseRouting();
 
