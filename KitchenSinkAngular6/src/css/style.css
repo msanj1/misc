@@ -213,3 +213,15 @@ body {
 .joint-dialog.joint-lightbox .fg {
     background-color: #F6F6F6;
 }
+
+/* port styling */
+.available-magnet {
+    fill: yellow;
+}
+
+/* element styling */
+.available-cell rect {
+    stroke-dasharray: 5, 2;
+}
+
+.selection-wrapper { display: none; }

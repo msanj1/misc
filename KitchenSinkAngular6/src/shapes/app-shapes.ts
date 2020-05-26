@@ -42,10 +42,177 @@ export namespace app {
                         fontWeight: 'Normal',
                         fontSize: 11,
                         strokeWidth: 0
-                    }
+                    },
+                    
                 }
                     
             }, joint.shapes.standard.InscribedImage.prototype.defaults);
+        }
+    }
+
+    export class Incomingcall extends joint.dia.Element{
+        defaults(){
+            return joint.util.defaultsDeep({
+                name: 'Name 1',
+                type: 'app.IncomingCall',
+                //  size: { width: 120, height: 120 },
+                markup: `<rect class="body"/><text class="question-text"/>
+                <g class="option"></g>
+               `,
+                ports: {
+                    groups: {
+                        'in': {
+                            position: 'top',
+                            attrs: {
+                                circle: {
+                                    magnet: 'passive',
+                                    stroke: 'white',
+                                    fill: '#feb663',
+                                    r: 14
+                                },
+                                text: {
+                                    pointerEvents: 'none',
+                                    fontSize: 12,
+                                    fill: 'white'
+                                }
+                            },
+                            label: {
+                                position: {
+                                    name: 'left',
+                                    args: { x: 5 }
+                                }
+                            }
+                        },
+                        out: {
+                            // position: 'bottom',
+                            position: {
+                                 name: 'bottom',
+                                // args: {
+                                //     startAngle: 180,
+                                //     step: 30
+                                // }
+                            },
+                            // markup:{
+                            //     tagName: 'image',
+                            //     selector:'image'
+                                
+                            // },
+
+                             markup:'<g class="root"><image class="image"></image></g>',
+                            // markup: ''
+                            attrs: {
+                                ".root": {
+                                    magnet: true,
+                                    //  stroke: '#fff',
+                                    //  fill: '#0069d9',
+                                    //  strokeWidth: 1,
+                                    //  xlinkHref: 'assets/angle-double-down-solid.svg',
+                             
+                                    //  stroke: '#fff',
+                                    //  fill: '#0069d9',
+                                    //  color: '#0069d9',
+                                },
+                                ".image": {
+                                    refWidth: '25',
+                                    refHeight: '25',
+                                    refX: '-10',
+                                    refY: '-10',
+                                    // refWidth: '100%',
+                                    // refHeight: '100%',
+                                    // magnet: true,
+                                    // fill: 'currentColor',
+                                    //  strokeWidth: 1,
+                                     xlinkHref: 'assets/angle-double-down-solid.svg',
+                                    //  stroke: '#fff',
+                                    //  color: '#0069d9',
+                                    //  strokeWidth: 1
+                                    //  refWidth: '100%',
+                                    //  refHeight: '100%'
+                                
+                                }
+                            }
+                        }
+                    },
+                    items: [{
+                        group: 'out',
+                    }
+                    // ,{
+                    //     group: 'out',args:{x:0}
+                    // }
+                ]
+                },
+                attrs: {
+                    '.': {
+                        magnet: false
+                    },
+                    '.body': {
+                        refWidth: '100%',
+                        refHeight: '100%',
+                        rx: '1%',
+                        // ry: '2%',
+                        stroke: 'none',
+                        fill: {
+                            type: 'linearGradient',
+                            stops: [
+                                { offset: '0%', color: '#30D0C6' },
+                                { offset: '100%', color: '#308AD0' }
+                            ],
+                            // Top-to-bottom gradient.
+                            attrs: { x1: '0%', y1: '0%', x2: '0%', y2: '100%' }
+                        }
+                    },
+                    '.btn-add-option': {
+                        refX: 10,
+                        refDy: -22,
+                        cursor: 'pointer',
+                        fill: 'white'
+                    },
+                    '.btn-remove-option': {
+                        xAlignment: 10,
+                        yAlignment: 13,
+                        cursor: 'pointer',
+                        fill: 'white'
+                    },
+                    '.options': {
+                        refX: 0
+                    },
+            
+                    // Text styling.
+                    text: {
+                        fontFamily: 'Arial'
+                    },
+                    '.option-text': {
+                        fontSize: 11,
+                        fill: '#4b4a67',
+                        refX: 30,
+                        yAlignment: 'middle'
+                    },
+                    '.question-text': {
+                        text: 'Incoming Call',
+                        fill: 'white',
+                        refX: '50%',
+                        refY: 15,
+                        fontSize: 15,
+                        textAnchor: 'middle',
+                        style: {
+                            textShadow: '1px 1px 0px gray'
+                        }
+                    },
+            
+                    // Options styling.
+                    '.option-rect': {
+                        rx: 3,
+                        ry: 3,
+                        stroke: 'white',
+                        strokeWidth: 1,
+                        strokeOpacity: .5,
+                        fillOpacity: .5,
+                        fill: 'white',
+                        refWidth: '100%'
+                    }
+                }
+                    
+            }, joint.dia.Element.prototype.defaults);
         }
     }
 

@@ -20,6 +20,7 @@ import {InspectorService} from './inspector-service';
 import {HaloService} from './halo-service';
 import {KeyboardService} from './keyboard-service';
 import * as appShapes from '../shapes/app-shapes';
+import { Factory } from './factory-service';
 
 class KitchenSinkService {
 
@@ -70,8 +71,6 @@ class KitchenSinkService {
 
         this.initializePaper();
         this.initializeStencil();
-
-        
         this.initializeSelection();
         this.initializeToolsAndInspector();
         this.initializeNavigator();
@@ -81,7 +80,7 @@ class KitchenSinkService {
     }
 
     initializePaper() {
-
+        let widgetFactory = new Factory();
         const graph = this.graph = new joint.dia.Graph({}, {
             cellNamespace: appShapes
         });
@@ -102,9 +101,22 @@ class KitchenSinkService {
             defaultLink: <joint.dia.Link>new appShapes.app.Link(),
             defaultConnectionPoint: appShapes.app.Link.connectionPoint,
             interactive: { linkMove: false },
-            async: true,
-            sorting: joint.dia.Paper.sorting.APPROX
+             async: true,
+            sorting: joint.dia.Paper.sorting.APPROX,
+            linkPinning: false,
+            snapLinks: true,
+            // markAvailable: true,
+            validateConnection:function(cellViewS, magnetS, cellViewT, magnetT, end, linkView) {
+                // Prevent linking from input ports.
+                    if (magnetS && magnetS.getAttribute('port-group') === 'in') return false;
+                    // Prevent linking from output ports to input ports within one element.
+                    if (cellViewS === cellViewT) return false;
+                    // Prevent linking to input ports.
+                    return magnetT && magnetT.getAttribute('port-group') === 'in';
+                }
         });
+
+        widgetFactory.createIncomingCallElement().addTo(graph);
 
         paper.on('blank:mousewheel', _.partial(this.onMousewheel, null), this);
         paper.on('cell:mousewheel', this.onMousewheel.bind(this));
@@ -139,7 +151,7 @@ class KitchenSinkService {
         // Initiate selecting when the user grabs the blank area of the paper while the Shift key is pressed.
         // Otherwise, initiate paper pan.
         this.paper.on('blank:pointerdown', (evt: joint.dia.Event, x: number, y: number) => {
-
+           
             if (keyboard.isActive('shift', evt)) {
                 this.selection.startSelecting(evt);
             } else {
@@ -241,10 +253,10 @@ class KitchenSinkService {
         });
 
         this.paper.on('link:mouseenter', (linkView: joint.dia.LinkView) => {
-
+        
             // Open tool only if there is none yet
             if (linkView.hasTools()) return;
-
+            console.log('link:mouseenter');
             const ns = joint.linkTools;
             const toolsView = new joint.dia.ToolsView({
                 name: 'link-hover',
@@ -259,6 +271,7 @@ class KitchenSinkService {
         });
 
         this.paper.on('link:mouseleave', (linkView: joint.dia.LinkView) => {
+            console.log('link:mouseleave');
 
             // Remove only the hover tool, not the pointerdown tool
             if (linkView.hasTools('link-hover')) {
@@ -267,9 +280,9 @@ class KitchenSinkService {
         });
 
         this.graph.on('change', (cell: joint.dia.Cell, opt: any ) => {
-
+           
             if (!cell.isLink() || !opt.inspector) return;
-
+            console.log('change');
             const ns = joint.linkTools;
             const toolsView = new joint.dia.ToolsView({
                 name: 'link-inspected',

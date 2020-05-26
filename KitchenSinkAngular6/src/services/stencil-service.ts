@@ -179,42 +179,43 @@ export class StencilService {
                 // cell
                 console.log('cell dragging started',cell);
                 // cell.
-                var newCell = new app.RectangularModel({
+                var newCell = new app.Incomingcall();
+                // var newCell = new app.RectangularModel({
                   
-                    attrs: {
+                //     attrs: {
                         
-                        root: {
-                            dataTooltip: 'Rectangle with ports',
-                            dataTooltipPosition: 'left',
-                            dataTooltipPositionSelector: '.joint-stencil'
-                        },
-                        body: {
-                            fill: 'transparent',
-                            rx: 2,
-                            ry: 2,
-                            stroke: '#31d0c6',
-                            strokeWidth: 2,
-                            strokeDasharray: '0'
-                        },
-                        label: {
-                            text: 'rect',
-                            fill: '#c6c7e2',
-                            fontFamily: 'Roboto Condensed',
-                            fontWeight: 'Normal',
-                            fontSize: 11,
-                            strokeWidth: 0
-                        }
-                    },
-                    ports: {
-                        items: [
-                            { group: 'in' },
-                            { group: 'in' },
-                            { group: 'out' }
-                        ]
-                    }
-                })
+                //         root: {
+                //             dataTooltip: 'Rectangle with ports',
+                //             dataTooltipPosition: 'left',
+                //             dataTooltipPositionSelector: '.joint-stencil'
+                //         },
+                //         body: {
+                //             fill: 'transparent',
+                //             rx: 2,
+                //             ry: 2,
+                //             stroke: '#31d0c6',
+                //             strokeWidth: 2,
+                //             strokeDasharray: '0'
+                //         },
+                //         label: {
+                //             text: 'rect',
+                //             fill: '#c6c7e2',
+                //             fontFamily: 'Roboto Condensed',
+                //             fontWeight: 'Normal',
+                //             fontSize: 11,
+                //             strokeWidth: 0
+                //         }
+                //     },
+                //     ports: {
+                //         items: [
+                //             { group: 'in' },
+                //             { group: 'in' },
+                //             { group: 'out' }
+                //         ]
+                //     }
+                // })
 
-                return newCell.resize(50,50).removeAttr('root/dataTooltip')
+                return newCell.removeAttr('root/dataTooltip')
             } 
         });
     }
