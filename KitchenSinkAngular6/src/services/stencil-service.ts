@@ -16,6 +16,7 @@ import * as appShapes from '../shapes/app-shapes';
 import * as _ from 'underscore';
 import * as joint from '../../vendor/rappid';
 import { app } from '../shapes/app-shapes';
+import { Factory } from './factory-service';
 
 
 export class CustomStencilElementView extends joint.dia.ElementView{
@@ -176,10 +177,19 @@ export class StencilService {
             },
             // Remove tooltip definition from clone
             dragStartClone: cell => {
-                // cell
-                console.log('cell dragging started',cell);
+               
+                var label = cell.prop("attrs")["label"].text;
+                console.log('cell dragging started',label);
+                let newCell: joint.dia.Element;
+                if(label == "Dial")
+                {
+                    newCell = Factory.createDialElement();
+                }else if (label == "Hangup")
+                {
+                    newCell = Factory.createHangUpElement();
+                }
                 // cell.
-                var newCell = new app.Incomingcall();
+                
                 // var newCell = new app.RectangularModel({
                   
                 //     attrs: {

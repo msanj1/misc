@@ -2,9 +2,24 @@ import * as joint from '../../vendor/rappid';
 import { app } from 'src/shapes/app-shapes';
 
 export class Factory {
+    static createDialElement(){
+        return new app.Dial({
+            size: { width: 290, height: 190 },
+            position: { x: 400, y: 100 },
+        });
+    }
+
+    static createHangUpElement(){
+        return new app.HangUp({
+            size: { width: 290, height: 80 },
+            position: { x: 400, y: 100 },
+        });
+    }
+
     createIncomingCallElement(){
-        return new app.Incomingcall({
-            size: { width: 130, height: 50 },
+
+        return new app.IncomingCall({
+            size: { width: 290, height: 120 },
             position: { x: 400, y: 100 },
         });
         return new joint.shapes.standard.Rectangle({

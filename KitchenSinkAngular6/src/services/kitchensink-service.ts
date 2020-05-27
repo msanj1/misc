@@ -86,7 +86,7 @@ class KitchenSinkService {
         });
 
         graph.on('add', (cell: joint.dia.Cell, collection: any, opt: any) => {
-            if (opt.stencil) this.inspectorService.create(cell);
+            // if (opt.stencil) this.inspectorService.create(cell);
         });
 
         this.commandManager = new joint.dia.CommandManager({ graph: graph });
@@ -203,7 +203,9 @@ class KitchenSinkService {
         const cell = cellView.model
         if (cell.isElement()) {
             this.selectPrimaryElement(<joint.dia.ElementView>cellView);
-        } else {
+        } 
+        else {
+            return;
             this.selectPrimaryLink(<joint.dia.LinkView>cellView);
         }
         this.inspectorService.create(cell);

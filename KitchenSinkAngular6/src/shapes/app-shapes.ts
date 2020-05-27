@@ -50,171 +50,522 @@ export namespace app {
         }
     }
 
-    export class Incomingcall extends joint.dia.Element{
+    export class HangUp extends joint.dia.Element{
         defaults(){
             return joint.util.defaultsDeep({
-                name: 'Name 1',
-                type: 'app.IncomingCall',
-                //  size: { width: 120, height: 120 },
-                markup: `<rect class="body"/><text class="question-text"/>
-                <g class="option"></g>
-               `,
-                ports: {
-                    groups: {
-                        'in': {
-                            position: 'top',
-                            attrs: {
-                                circle: {
-                                    magnet: 'passive',
-                                    stroke: 'white',
-                                    fill: '#feb663',
-                                    r: 14
-                                },
-                                text: {
-                                    pointerEvents: 'none',
-                                    fontSize: 12,
-                                    fill: 'white'
-                                }
-                            },
-                            label: {
-                                position: {
-                                    name: 'left',
-                                    args: { x: 5 }
-                                }
-                            }
-                        },
-                        out: {
-                            // position: 'bottom',
-                            position: {
-                                 name: 'bottom',
-                                // args: {
-                                //     startAngle: 180,
-                                //     step: 30
-                                // }
-                            },
-                            // markup:{
-                            //     tagName: 'image',
-                            //     selector:'image'
-                                
-                            // },
-
-                             markup:'<g class="root"><image class="image"></image></g>',
-                            // markup: ''
-                            attrs: {
-                                ".root": {
-                                    magnet: true,
-                                    //  stroke: '#fff',
-                                    //  fill: '#0069d9',
-                                    //  strokeWidth: 1,
-                                    //  xlinkHref: 'assets/angle-double-down-solid.svg',
-                             
-                                    //  stroke: '#fff',
-                                    //  fill: '#0069d9',
-                                    //  color: '#0069d9',
-                                },
-                                ".image": {
-                                    refWidth: '25',
-                                    refHeight: '25',
-                                    refX: '-10',
-                                    refY: '-10',
-                                    // refWidth: '100%',
-                                    // refHeight: '100%',
-                                    // magnet: true,
-                                    // fill: 'currentColor',
-                                    //  strokeWidth: 1,
-                                     xlinkHref: 'assets/angle-double-down-solid.svg',
-                                    //  stroke: '#fff',
-                                    //  color: '#0069d9',
-                                    //  strokeWidth: 1
-                                    //  refWidth: '100%',
-                                    //  refHeight: '100%'
-                                
-                                }
-                            }
-                        }
-                    },
-                    items: [{
-                        group: 'out',
-                    }
-                    // ,{
-                    //     group: 'out',args:{x:0}
-                    // }
-                ]
-                },
+                type: 'app.HangUp',
+               markup: `<g><rect class="body"/>
+               <text class="widgetName"></text>
+               <text class="widgetTitle" ></text>
+               <image style="color:#6d6e71"/>
+               </g>`
+                ,
                 attrs: {
                     '.': {
-                        magnet: false
+                        magnet: false,
                     },
                     '.body': {
                         refWidth: '100%',
                         refHeight: '100%',
-                        rx: '1%',
-                        // ry: '2%',
-                        stroke: 'none',
-                        fill: {
-                            type: 'linearGradient',
-                            stops: [
-                                { offset: '0%', color: '#30D0C6' },
-                                { offset: '100%', color: '#308AD0' }
-                            ],
-                            // Top-to-bottom gradient.
-                            attrs: { x1: '0%', y1: '0%', x2: '0%', y2: '100%' }
-                        }
+                        refX: 0,
+                        refY: 0,
+                        fill: '#fff',
+                        // filter: {
+                        //     name: 'dropShadow',
+                        //     args: {
+                        //         dx: 0,
+                        //         dy: 0,
+                        //         blur: 3
+                        //     }
+                        // },
+                        stroke: 0
                     },
-                    '.btn-add-option': {
-                        refX: 10,
-                        refDy: -22,
-                        cursor: 'pointer',
-                        fill: 'white'
-                    },
-                    '.btn-remove-option': {
-                        xAlignment: 10,
-                        yAlignment: 13,
-                        cursor: 'pointer',
-                        fill: 'white'
-                    },
-                    '.options': {
-                        refX: 0
-                    },
-            
-                    // Text styling.
-                    text: {
-                        fontFamily: 'Arial'
-                    },
-                    '.option-text': {
-                        fontSize: 11,
-                        fill: '#4b4a67',
-                        refX: 30,
-                        yAlignment: 'middle'
-                    },
-                    '.question-text': {
-                        text: 'Incoming Call',
-                        fill: 'white',
-                        refX: '50%',
+                    '.widgetName': {
+                        refX: 15,
                         refY: 15,
+                        fontSize: 13,
+                        fill: '#6d6e71',
+                        fontFamily: 'ArialMT, Arial',
+                        text: 'Hanup'
+                    },
+                    '.widgetTitle': {
+      
+                        refY: '40',
+                        refX: '50%',
+                         textAnchor: 'middle',
+                         
                         fontSize: 15,
-                        textAnchor: 'middle',
-                        style: {
-                            textShadow: '1px 1px 0px gray'
+                        fill:'#58595b',
+                        fontFamily: 'ArialMT, Arial',
+                        fontWeight:700,
+                        text: 'Hang Up'
+                    },
+                    image: {
+                        xlinkHref: 'assets/phone-volume-solid-gray.svg',
+                        fill: '#58595b',
+                        height: '25',
+                        width: '25',
+                        refY: 35,
+                        refX: 14
+            
+                    },
+                    '.widgetDescription': {
+                        refX: 15,
+                        refY: 80,
+                        fontSize: 14,
+                        fill:'#58595b',
+                        fontFamily: 'ArialMT, Arial',
+                        text: 'Dial 0422613824'
+                    },
+                    '.timeoutRect': {
+                        refWidth: '93%',
+                        height: '28',
+                        refX: 10,
+                        refY: '70%',
+                        fill: '#26A79F'
+                    },
+                    '.timeoutText': {
+                        ref: '.timeoutRect',
+                        fontSize: 14,
+                        fill:'#fff',
+                        fontFamily: 'ArialMT, Arial',
+                        fontWeight:700,
+                        refX: '50%',
+                        refY: 19,
+                        textAnchor: 'middle'
+                    }
+                },
+               ports: {
+                items: [
+                       { group: 'in' },
+                    //   { group: 'out' },
+                    // { group: 'out2' }
+                ],
+                groups: {
+                    'in': {
+                        markup: [{
+                            tagName: 'circle',
+                            selector: 'portBody',
+                            attributes: {
+                                'r': 10
+                            }
+                        }],
+                        attrs: {
+                            portBody: {
+                                magnet: true,
+                                fill: '#308AD0',
+                                strokeWidth: 0
+                            },
+                            portLabel: {
+                                fontSize: 11,
+                                fill: '#308AD0',
+                                fontWeight: 800
+                            }
+                        },
+                        position: {
+                            name: 'ellipse',
+                            // args: {
+                            //     startAngle: 0,
+                            //     step: 30
+                            // }
+                        },
+                        label: {
+                            position: {
+                                name: 'radial',
+                                args: null
+                            }
                         }
                     },
-            
-                    // Options styling.
-                    '.option-rect': {
-                        rx: 3,
-                        ry: 3,
-                        stroke: 'white',
-                        strokeWidth: 1,
-                        strokeOpacity: .5,
-                        fillOpacity: .5,
-                        fill: 'white',
-                        refWidth: '100%'
+                    'out': {
+                        markup: [{
+                            tagName: 'circle',
+                            selector: 'portBody',
+                            attributes: {
+                                'r': 10
+                            }
+                        }],
+                        attrs: {
+                            portBody: {
+                                magnet: true,
+                                fill: '#308AD0',
+                                strokeWidth: 0
+                            },
+                            portLabel: {
+                                fontSize: 11,
+                                fill: '#308AD0',
+                                fontWeight: 800
+                            }
+                        },
+                        position: {
+                            //  name: 'right',
+                            args: {
+                                y:'100',
+                                x: '200'
+                            }
+                        },
+                        label: {
+                            position: {
+                                name: 'radial',
+                                args: null
+                            }
+                        }
                     }
                 }
+            }
                     
             }, joint.dia.Element.prototype.defaults);
         }
     }
+
+    export class IncomingCall extends joint.dia.Element{
+        defaults(){
+            return joint.util.defaultsDeep({
+                type: 'app.IncomingCall',
+               markup: `<g><rect class="body"/>
+               <text class="widgetName"></text>
+               <text class="widgetTitle" ></text>
+               <image style="color:#6d6e71"/>
+              
+               <g>
+               <rect class="timeoutRect"  />
+               <text class="timeoutText" ><tspan x="7.11" y="0">Call Connected</tspan></text>
+               </g>
+               </g>`
+                ,
+                attrs: {
+                    '.': {
+                        magnet: false,
+                    },
+                    '.body': {
+                        refWidth: '100%',
+                        refHeight: '100%',
+                        refX: 0,
+                        refY: 0,
+                        fill: '#fff',
+                        // filter: {
+                        //     name: 'dropShadow',
+                        //     args: {
+                        //         dx: 0,
+                        //         dy: 0,
+                        //         blur: 3
+                        //     }
+                        // },
+                        stroke: 0
+                    },
+                    '.widgetName': {
+                        refX: 15,
+                        refY: 15,
+                        fontSize: 13,
+                        fill: '#6d6e71',
+                        fontFamily: 'ArialMT, Arial',
+                        text: 'Incoming Call'
+                    },
+                    '.widgetTitle': {
+      
+                        refY: '40',
+                        refX: '50%',
+                         textAnchor: 'middle',
+                         
+                        fontSize: 15,
+                        fill:'#58595b',
+                        fontFamily: 'ArialMT, Arial',
+                        fontWeight:700,
+                        text: 'Default Call Flow'
+                    },
+                    image: {
+                        xlinkHref: 'assets/phone-volume-solid-gray.svg',
+                        fill: '#58595b',
+                        height: '25',
+                        width: '25',
+                        refY: 35,
+                        refX: 14
+            
+                    },
+                    '.widgetDescription': {
+                        refX: 15,
+                        refY: 80,
+                        fontSize: 14,
+                        fill:'#58595b',
+                        fontFamily: 'ArialMT, Arial',
+                        text: 'Dial 0422613824'
+                    },
+                    '.timeoutRect': {
+                        refWidth: '93%',
+                        height: '28',
+                        refX: 10,
+                        refY: '70%',
+                        fill: '#26A79F'
+                    },
+                    '.timeoutText': {
+                        ref: '.timeoutRect',
+                        fontSize: 14,
+                        fill:'#fff',
+                        fontFamily: 'ArialMT, Arial',
+                        fontWeight:700,
+                        refX: '50%',
+                        refY: 19,
+                        textAnchor: 'middle'
+                    }
+                },
+               ports: {
+                items: [
+                    //   { group: 'in' },
+                      { group: 'out' },
+                    // { group: 'out2' }
+                ],
+                groups: {
+                    'in': {
+                        markup: [{
+                            tagName: 'circle',
+                            selector: 'portBody',
+                            attributes: {
+                                'r': 10
+                            }
+                        }],
+                        attrs: {
+                            portBody: {
+                                magnet: true,
+                                fill: '#308AD0',
+                                strokeWidth: 0
+                            },
+                            portLabel: {
+                                fontSize: 11,
+                                fill: '#308AD0',
+                                fontWeight: 800
+                            }
+                        },
+                        position: {
+                            name: 'ellipse',
+                            // args: {
+                            //     startAngle: 0,
+                            //     step: 30
+                            // }
+                        },
+                        label: {
+                            position: {
+                                name: 'radial',
+                                args: null
+                            }
+                        }
+                    },
+                    'out': {
+                        markup: [{
+                            tagName: 'circle',
+                            selector: 'portBody',
+                            attributes: {
+                                'r': 10
+                            }
+                        }],
+                        attrs: {
+                            portBody: {
+                                magnet: true,
+                                fill: '#308AD0',
+                                strokeWidth: 0
+                            },
+                            portLabel: {
+                                fontSize: 11,
+                                fill: '#308AD0',
+                                fontWeight: 800
+                            }
+                        },
+                        position: {
+                            //  name: 'right',
+                            args: {
+                                y:'100',
+                                x: '200'
+                            }
+                        },
+                        label: {
+                            position: {
+                                name: 'radial',
+                                args: null
+                            }
+                        }
+                    }
+                }
+            }
+                    
+            }, joint.dia.Element.prototype.defaults);
+        }
+    }
+
+    export class Dial extends joint.dia.Element{
+        defaults(){
+            return joint.util.defaultsDeep({
+                name: 'Dial 1',
+                type: 'app.Dial',
+                //  size: { width: 120, height: 120 },
+            //     markup: `<rect class="body"/><text class="question-text"/>
+            //     <rect class="option-successful"/>
+            //         <text class="option-successful-text"/>
+            //    `,
+               markup: `<g><rect class="body"/>
+               <text class="widgetName"></text>
+               <text class="widgetTitle" ></text>
+               <image style="color:#6d6e71"/>
+               <text class="widgetDescription"></text>
+               <g>
+               <rect class="timeoutRect"  />
+               <text class="timeoutText" ><tspan x="7.11" y="0">Timeout</tspan></text>
+               </g>
+               </g>`
+                ,
+                attrs: {
+                    '.': {
+                        magnet: false,
+                    },
+                    '.body': {
+                        refWidth: '100%',
+                        refHeight: '100%',
+                        refX: 0,
+                        refY: 0,
+                        fill: '#fff',
+                        // filter: {
+                        //     name: 'dropShadow',
+                        //     args: {
+                        //         dx: 0,
+                        //         dy: 0,
+                        //         blur: 3
+                        //     }
+                        // },
+                        stroke: 0
+                    },
+                    '.widgetName': {
+                        refX: 15,
+                        refY: 15,
+                        fontSize: 13,
+                        fill: '#6d6e71',
+                        fontFamily: 'ArialMT, Arial',
+                        text: 'Dial'
+                    },
+                    '.widgetTitle': {
+      
+                        refY: '20%',
+                        refX: '50%',
+                        textAnchor: 'middle',
+                        fontSize: 15,
+                        fill:'#58595b',
+                        fontFamily: 'ArialMT, Arial',
+                        fontWeight:700,
+                        text: 'Dial 1'
+                    },
+                    image: {
+                        xlinkHref: 'assets/phone-volume-solid-gray.svg',
+                          fill: '#58595b',
+                          height: '25',
+                          width: '25',
+                        refY: 35,
+                        refX: 9
+            
+                    },
+                    '.widgetDescription': {
+                        refX: 15,
+                        refY: 80,
+                        fontSize: 14,
+                        fill:'#58595b',
+                        fontFamily: 'ArialMT, Arial',
+                        text: 'Dial 0422613824'
+                    },
+                    '.timeoutRect': {
+                        refWidth: '93%',
+                        height: '28',
+                        refX: 10,
+                        refY: 150,
+                        fill: '#26A79F'
+                    },
+                    '.timeoutText': {
+                        ref: '.timeoutRect',
+                        fontSize: 14,
+                        fill:'#fff',
+                        fontFamily: 'ArialMT, Arial',
+                        fontWeight:700,
+                        refX: '50%',
+                        refY: 19,
+                        textAnchor: 'middle'
+                    }
+                },
+               ports: {
+                items: [
+                      { group: 'in' },
+                      { group: 'out' },
+                    // { group: 'out2' }
+                ],
+                groups: {
+                    'in': {
+                        markup: [{
+                            tagName: 'circle',
+                            selector: 'portBody',
+                            attributes: {
+                                'r': 10
+                            }
+                        }],
+                        attrs: {
+                            portBody: {
+                                magnet: true,
+                                fill: '#308AD0',
+                                strokeWidth: 0
+                            },
+                            portLabel: {
+                                fontSize: 11,
+                                fill: '#308AD0',
+                                fontWeight: 800
+                            }
+                        },
+                        position: {
+                            name: 'ellipse',
+                            // args: {
+                            //     startAngle: 0,
+                            //     step: 30
+                            // }
+                        },
+                        label: {
+                            position: {
+                                name: 'radial',
+                                args: null
+                            }
+                        }
+                    },
+                    'out': {
+                        markup: [{
+                            tagName: 'circle',
+                            selector: 'portBody',
+                            attributes: {
+                                'r': 10
+                            }
+                        }],
+                        attrs: {
+                            portBody: {
+                                magnet: true,
+                                fill: '#308AD0',
+                                strokeWidth: 0
+                            },
+                            portLabel: {
+                                fontSize: 11,
+                                fill: '#308AD0',
+                                fontWeight: 800
+                            }
+                        },
+                        position: {
+                            //  name: 'right',
+                            args: {
+                                y:'163',
+                                x: '200'
+                            }
+                        },
+                        label: {
+                            position: {
+                                name: 'radial',
+                                args: null
+                            }
+                        }
+                    }
+                }
+            }
+                    
+            }, joint.dia.Element.prototype.defaults);
+        }
+    }
+
 
     export class DialModel extends joint.shapes.standard.InscribedImage{
         
