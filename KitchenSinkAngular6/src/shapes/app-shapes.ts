@@ -294,7 +294,8 @@ export namespace app {
                         height: '28',
                         refX: 10,
                         refY: '70%',
-                        fill: '#26A79F'
+                        fill: '#26A79F',
+                        magnet: true
                     },
                     '.timeoutText': {
                         ref: '.timeoutRect',
@@ -310,7 +311,7 @@ export namespace app {
                ports: {
                 items: [
                     //   { group: 'in' },
-                      { group: 'out' },
+                    //   { group: 'out' },
                     // { group: 'out2' }
                 ],
                 groups: {
@@ -471,7 +472,8 @@ export namespace app {
                         height: '28',
                         refX: 10,
                         refY: 150,
-                        fill: '#26A79F'
+                        fill: '#26A79F',
+                        magnet: true
                     },
                     '.timeoutText': {
                         ref: '.timeoutRect',
@@ -487,7 +489,7 @@ export namespace app {
                ports: {
                 items: [
                       { group: 'in' },
-                      { group: 'out' },
+                    //   { group: 'out' },
                     // { group: 'out2' }
                 ],
                 groups: {
