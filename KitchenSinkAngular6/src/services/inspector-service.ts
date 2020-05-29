@@ -12,13 +12,38 @@ file, You can obtain one at http://jointjs.com/license/rappid_v2.txt
 
 
 import * as joint from '../../vendor/rappid';
+ import * as jQuery from 'JQuery';
 
 export class InspectorService {
 
     create(cell: joint.dia.Cell): joint.ui.Inspector {
 
         const { groups, inputs } = this.getInspectorConfig()[cell.get('type')];
-        return joint.ui.Inspector.create('.inspector-container', { cell, groups, inputs });
+        let inspector = joint.ui.Inspector.create('.inspector-container', { cell, groups, inputs, validateInput: function(e,p,t, inspector){
+            if((<any>cell).validateProperty)
+            {
+                // console.log(cell);
+                let $el = jQuery(e);
+
+                // console.log('inspector',i);
+                console.log('create');
+                var value = inspector.parse(t, inspector.getFieldValue(e, t), e);
+
+                // (<any>cell).validateProperty(p,value);
+
+                $el.removeClass('error').parent().find('error').remove();
+                var error = cell.validateProperty(p, value);
+                if (error) {
+                    var $error = jQuery('<error></error>').text(error);
+                    $el.addClass('error').after($error);
+                }
+            }
+   
+            return !error;
+        }
+ });
+
+        return inspector;
     }
 
     getInspectorConfig() {
@@ -126,6 +151,53 @@ export class InspectorService {
                 { value: 8, content: '<div style="background:#fff;width:16px;height:30px;margin:0 8px;border-radius: 2px;"/>' }
             ],
 
+            whisperOptions: [
+                { value: 'whisper1', content: 'Play Sound 1' },
+                { value: 'whisper2', content: 'Play Sound 2' },
+                { value: 'whisper3', content: 'Play Sound 3' },
+                { value: 'whisper4', content: 'Play Sound 4' },
+
+                // { value: 8, content: '<div style="background:#fff;width:16px;height:30px;margin:0 8px;border-radius: 2px;"/>' }
+            ],
+            dialOptions: [
+                { value: 'dialNumber', content: 'Dial Number' },
+                { value: 'dialStore', content: 'Dial Store' }
+
+                // { value: 8, content: '<div style="background:#fff;width:16px;height:30px;margin:0 8px;border-radius: 2px;"/>' }
+            ],
+            postcodeMapperOptions: [
+                { value: '1', content: 'Profile 1' },
+                { value: '2', content: 'Profile 2' }
+
+                // { value: 8, content: '<div style="background:#fff;width:16px;height:30px;margin:0 8px;border-radius: 2px;"/>' }
+            ],
+            storeOptions: [
+                { value: '1', content: 'QLD' },
+                { value: '2', content: 'NSW' }
+
+                // { value: 8, content: '<div style="background:#fff;width:16px;height:30px;margin:0 8px;border-radius: 2px;"/>' }
+            ],
+            soundOptions: [
+                { value: 'music1', content: 'Play music 1' },
+                { value: 'music2', content: 'Play music 2' },
+                { value: 'music3', content: 'Play music 3' },
+                { value: 'music4', content: 'Play Sound 4' },
+
+                // { value: 8, content: '<div style="background:#fff;width:16px;height:30px;margin:0 8px;border-radius: 2px;"/>' }
+            ],
+            ringingTimeouts: [
+                { value: 5, content: '5' },
+                { value: 10, content: '10' },
+                { value: 15, content: '15' }
+
+                // { value: 8, content: '<div style="background:#fff;width:16px;height:30px;margin:0 8px;border-radius: 2px;"/>' }
+            ],
+            hangup: [
+                { value: 'normal', content: 'Normal' }
+
+                // { value: 8, content: '<div style="background:#fff;width:16px;height:30px;margin:0 8px;border-radius: 2px;"/>' }
+            ],
+
             router: [
                 { value: 'normal', content: '<p style="background:#fff;width:2px;height:30px;margin:0 14px;border-radius: 2px;"/>' },
                 { value: 'orthogonal', content: '<p style="width:20px;height:30px;margin:0 5px;border-bottom: 2px solid #fff;border-left: 2px solid #fff;"/>' },
@@ -178,6 +250,159 @@ export class InspectorService {
         };
 
         return <{ [index: string]: any }>{
+            'app.HangUp' : {
+                inputs: {    
+                    attrs: {
+                        '.widgetTitle': {
+                            text: {
+                               
+                                type: 'text',
+                                group: 'presentation',
+                                label: 'Name',
+                                index: 1
+                            }
+                        }
+                       },
+                    options: {
+                        type: 'select-box',
+                        group: 'presentation',
+                        label: 'Options',
+                        options: options.hangup,
+                        index: 2
+                    }
+                }
+            },
+
+            'app.IncomingCall' :{
+                inputs: {        
+                   attrs: {
+                    // required: 'required',
+                    '.widgetTitle': {
+                        text: {
+                           
+                            type: 'text',
+                            group: 'presentation',
+                            label: 'Name',
+                            index: 1
+                        }
+                    }
+                   },
+                   defaultWhisper:{
+                       type: 'select-box',
+                       group: 'presentation',
+                       label: 'Default Whisper',
+                       options: options.whisperOptions,
+                       index: 2
+                   },
+                   ringingTimeOut:{
+                    type: 'select-box',
+                    group: 'presentation',
+                    label: 'Ringing Timeout (seconds)',
+                    options: options.ringingTimeouts,
+                    index: 2
+                },enableCallerIdPassthrough: {
+                    type: 'toggle',
+                    group: 'presentation',
+                    label: 'Enable Caller ID Passthrough',
+                    // options: options.ringingTimeouts,
+                    index: 3
+                }
+                },
+                groups: {
+                    presentation: {
+                        label: 'Presentation',
+                        index: 1
+                    }
+                }
+            },
+            'app.Dial' :{
+                inputs: {        
+                    attrs: {
+                        // required: 'required',
+                        '.widgetTitle': {
+                            text: {
+                               
+                                type: 'text',
+                                group: 'presentation',
+                                label: 'Name',
+                                index: 1
+                            }
+                        },
+                        '.widgetDescription': {
+                            text:{
+                                type: 'text',
+                                group: 'presentation',
+                                label: 'Number',
+                                index: 5
+                            }
+                        }
+                       },
+                   playSound:{
+                       type: 'select-box',
+                       group: 'presentation',
+                       label: 'Play Sound',
+                       options: options.soundOptions,
+                       index: 2
+                   },
+                   whisper:{
+                        type: 'select-box',
+                        group: 'presentation',
+                        label: 'Whisper',
+                        options: options.whisperOptions,
+                        index: 3
+                    },
+                    dialOptions: {
+                        type: 'select-box',
+                        group: 'presentation',
+                        label: 'Dial Options',
+                        options: options.dialOptions,
+                        index: 4
+                    },
+                    postcodeMapperProfile : {
+                        type: 'select-box',
+                        group: 'presentation',
+                        label: 'Postcode Mapper Profile',
+                        options: options.postcodeMapperOptions,
+                        index: 6,
+                        when: { not: {eq: { 'dialOptions': 'dialNumber' } } }
+                    },
+                    store : {
+                        type: 'select-box',
+                        group: 'presentation',
+                        label: 'Store',
+                        options: options.storeOptions,
+                        index: 7,
+                        when: { not: {eq: { 'dialOptions': 'dialNumber' } } }
+                    },
+                    usePrompt : {
+                        type: 'toggle',
+                        group: 'presentation',
+                        label: 'Use prompt before answering a call',
+                        index: 8
+                    },
+                    ringingTimeOut : {
+                        type: 'select-box',
+                        group: 'presentation',
+                        label: 'Ringing Timeout (seconds)',
+                        options: options.ringingTimeouts,
+                        index: 8
+                    },
+                    musicOnHold:{
+                        type: 'select-box',
+                        group: 'presentation',
+                        label: 'Music on Hold',
+                        options: options.soundOptions,
+                        index: 9
+                    },
+                },
+                groups: {
+                    presentation: {
+                        label: 'Presentation',
+                        index: 1
+                    }
+                }
+            }
+            ,
 
             'app.Link': {
                 inputs: {

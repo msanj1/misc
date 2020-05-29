@@ -13,6 +13,7 @@ file, You can obtain one at http://jointjs.com/license/rappid_v2.txt
 
 import * as joint from '../../vendor/rappid';
 import { memoize } from 'lodash';
+import { stringify } from 'querystring';
 
 export namespace app {
 
@@ -53,7 +54,8 @@ export namespace app {
     export class HangUp extends joint.dia.Element{
         defaults(){
             return joint.util.defaultsDeep({
-                type: 'app.HangUp',
+               options:'normal',
+               type: 'app.HangUp',
                markup: `<g><rect class="body"/>
                <text class="widgetName"></text>
                <text class="widgetTitle" ></text>
@@ -92,7 +94,7 @@ export namespace app {
       
                         refY: '40',
                         refX: '50%',
-                         textAnchor: 'middle',
+                        textAnchor: 'middle',
                          
                         fontSize: 15,
                         fill:'#58595b',
@@ -218,8 +220,22 @@ export namespace app {
     }
 
     export class IncomingCall extends joint.dia.Element{
+        validateProperty(path, value){
+            switch (path) {
+                case 'attrs/.widgetTitle/text':
+                    if (value == ''){
+                        return "Please enter a name";
+                    }
+            }
+            return null;
+        }
+
         defaults(){
+            
             return joint.util.defaultsDeep({
+                defaultWhisper: '',
+                ringingTimeOut: 10,
+                enableCallerIdPassthrough: false,
                 type: 'app.IncomingCall',
                markup: `<g><rect class="body"/>
                <text class="widgetName"></text>
@@ -391,9 +407,21 @@ export namespace app {
     }
 
     export class Dial extends joint.dia.Element{
+        // number: string;
         defaults(){
             return joint.util.defaultsDeep({
-                name: 'Dial 1',
+                // name: '',
+                playSound: '',
+                whisper: '',
+                dialOptions: 'dialNumber',
+                // number: '0422613824',
+
+                postcodeMapperProfile: '',
+                store: '',
+                usePrompt: true,
+                ringingTimeOut: 20,
+                musicOnHold: '',
+
                 type: 'app.Dial',
                 //  size: { width: 120, height: 120 },
             //     markup: `<rect class="body"/><text class="question-text"/>
@@ -448,7 +476,7 @@ export namespace app {
                         fill:'#58595b',
                         fontFamily: 'ArialMT, Arial',
                         fontWeight:700,
-                        text: 'Dial 1'
+                        text: 'Sales'
                     },
                     image: {
                         xlinkHref: 'assets/phone-volume-solid-gray.svg',
@@ -464,8 +492,7 @@ export namespace app {
                         refY: 80,
                         fontSize: 14,
                         fill:'#58595b',
-                        fontFamily: 'ArialMT, Arial',
-                        text: 'Dial 0422613824'
+                        fontFamily: 'ArialMT, Arial'
                     },
                     '.timeoutRect': {
                         refWidth: '93%',

@@ -140,6 +140,15 @@ body {
     width: 50%;
 }
 
+error,
+.error{
+    color:red;
+}
+
+.error{
+    border-bottom:  2px solid red !important;
+}
+
 .joint-select-box.joint-color-palette .select-box-option:nth-child(2):not(.hover) {
     border: inset;
     border-width: 1px;
