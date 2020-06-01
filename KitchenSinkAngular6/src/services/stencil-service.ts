@@ -249,37 +249,21 @@ export class StencilService {
                                 label:{
                                     text:'Dial'
                                 },
-                                // image: {
-                                //     xlinkHref: 'assets/phone-volume-solid.svg',
-                                // }
-                            }
-                        }
-                    )
-                    ,
-                    new app.StencilItem(
-                        {
-                            // size: { width: 1, height: 1 },
-                            attrs: {
-                                root: {
-                                    dataTooltip: 'Dial',
-                                    dataTooltipPosition: 'left',
-                                    dataTooltipPositionSelector: '.joint-stencil'
-                                },
-                                label:{
-                                    text:'Hangup'
-                                },
                                 image: {
                                     xlinkHref: 'assets/phone-volume-solid.svg',
                                 }
                             }
                         }
-                    ),
+                    )
+                    
+                 
+                ],
+                other:[
                     new app.StencilItem(
                         {
-                            // size: { width: 1, height: 1 },
                             attrs: {
                                 root: {
-                                    dataTooltip: 'Dial',
+                                    dataTooltip: 'Hang Up',
                                     dataTooltipPosition: 'left',
                                     dataTooltipPositionSelector: '.joint-stencil'
                                 },
@@ -301,12 +285,7 @@ export class StencilService {
     getStencilGroups() {
         return <{ [key: string]: ui.Stencil.Group }>{
             voice: { index: 1, label: 'Voice', closed:false },
-            standard: { index: 2, label: 'Standard shapes' },
-            fsa: { index: 3, label: 'State machine' },
-            pn: { index: 4, label: 'Petri nets' },
-            erd: { index: 5, label: 'Entity-relationship' },
-            uml: { index: 6, label: 'UML' },
-            org: { index: 7, label: 'ORG' }
+            other: { index: 2, label: 'Other' }
         };
     }
 

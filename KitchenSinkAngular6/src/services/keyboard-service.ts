@@ -13,6 +13,7 @@ file, You can obtain one at http://jointjs.com/license/rappid_v2.txt
 
 import * as joint from '../../vendor/rappid';
 import * as _ from 'lodash';
+import { app } from 'src/shapes/app-shapes';
 
 export class KeyboardService {
 
@@ -52,13 +53,24 @@ export class KeyboardService {
                 selection.collection.reset(elements);
             },
 
-            'ctrl+x shift+delete': () => {
-                clipboard.cutElements(selection.collection, graph);
-            },
+            // 'ctrl+x shift+delete': () => {
+             
+            //     clipboard.cutElements(selection.collection, graph);
+            // },
 
-            'delete backspace': (evt: JQuery.Event) => {
+            'delete': (evt: JQuery.Event) => {
+             
                 evt.preventDefault();
-                graph.removeCells(selection.collection.toArray());
+
+                // selection.collection.forEach(element => {
+                //     console.log('ctrl+x shift+delete',element);
+                // });
+              
+                
+                // console.log('ctrl+x shift+delete',selection.collection.where(c=>!(c instanceof app.IncomingCall)));
+              
+                
+                graph.removeCells(selection.collection.where(c=>!(c instanceof app.IncomingCall)));
             },
 
             'ctrl+z': () => {
@@ -71,9 +83,9 @@ export class KeyboardService {
                 selection.cancelSelection();
             },
 
-            'ctrl+a': () => {
-                selection.collection.reset(graph.getElements());
-            },
+            // 'ctrl+a': () => {
+            //     selection.collection.reset(graph.getElements());
+            // },
 
             'ctrl+plus': (evt: JQuery.Event) => {
                 evt.preventDefault();

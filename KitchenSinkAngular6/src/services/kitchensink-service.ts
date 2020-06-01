@@ -117,6 +117,7 @@ class KitchenSinkService {
         });
 
         widgetFactory.createIncomingCallElement().addTo(graph);
+        this.commandManager.reset();
 
         paper.on('blank:mousewheel', _.partial(this.onMousewheel, null), this);
         paper.on('cell:mousewheel', this.onMousewheel.bind(this));
@@ -153,6 +154,7 @@ class KitchenSinkService {
         this.paper.on('blank:pointerdown', (evt: joint.dia.Event, x: number, y: number) => {
            
             if (keyboard.isActive('shift', evt)) {
+            
                 this.selection.startSelecting(evt);
             } else {
                 this.selection.collection.reset([]);
@@ -165,6 +167,7 @@ class KitchenSinkService {
 
             // Select an element if CTRL/Meta key is pressed while the element is clicked.
             if (keyboard.isActive('ctrl meta', evt)) {
+                console.log('started adding');
                 this.selection.collection.add(elementView.model);
             }
 
@@ -174,6 +177,7 @@ class KitchenSinkService {
 
             // Unselect an element if the CTRL/Meta key is pressed while a selected element is clicked.
             if (keyboard.isActive('ctrl meta', evt)) {
+                console.log('started removing');
                 this.selection.collection.remove(elementView.model);
             }
 
@@ -213,14 +217,14 @@ class KitchenSinkService {
 
     selectPrimaryElement(elementView: joint.dia.ElementView) {
 
-        const element = elementView.model;
+        // const element = elementView.model;
 
-        new joint.ui.FreeTransform({
-            cellView: elementView,
-            allowRotation: false,
-            preserveAspectRatio: !!element.get('preserveAspectRatio'),
-            allowOrthogonalResize: element.get('allowOrthogonalResize') !== false
-        }).render();
+        // new joint.ui.FreeTransform({
+        //     cellView: elementView,
+        //     allowRotation: false,
+        //     preserveAspectRatio: !!element.get('preserveAspectRatio'),
+        //     allowOrthogonalResize: element.get('allowOrthogonalResize') !== false
+        // }).render();
 
         this.haloService.create(elementView);
     }

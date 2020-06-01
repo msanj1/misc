@@ -149,6 +149,12 @@ error,
     border-bottom:  2px solid red !important;
 }
 
+.joint-halo {
+    border: 2px dashed #5faaee;
+ }
+
+/* .halo[data-type="basic.Rect"] .remove { display: none; } */
+
 .joint-select-box.joint-color-palette .select-box-option:nth-child(2):not(.hover) {
     border: inset;
     border-width: 1px;
