@@ -823,7 +823,7 @@ export namespace app {
             return joint.util.defaultsDeep({
                 type: 'app.Link',
                 router: {
-                    name: 'normal'
+                    name: 'orthogonal'
                 },
                 connector: {
                     name: 'rounded'

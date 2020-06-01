@@ -100,6 +100,7 @@ class KitchenSinkService {
             cellViewNamespace: appShapes,
             defaultLink: <joint.dia.Link>new appShapes.app.Link(),
             defaultConnectionPoint: appShapes.app.Link.connectionPoint,
+            // defaultRouter :  { name: 'orthogonal' },
             interactive: { linkMove: false },
              async: true,
             sorting: joint.dia.Paper.sorting.APPROX,
