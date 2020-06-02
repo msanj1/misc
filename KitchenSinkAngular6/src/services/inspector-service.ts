@@ -19,7 +19,8 @@ export class InspectorService {
     create(cell: joint.dia.Cell): joint.ui.Inspector {
 
         const { groups, inputs } = this.getInspectorConfig()[cell.get('type')];
-        let inspector = joint.ui.Inspector.create('.inspector-container', { cell, groups, inputs, validateInput: function(e,p,t, inspector){
+        let inspector = joint.ui.Inspector.create('.inspector-container', <any>{ cell, groups, inputs, 
+            validateInput: function(e,p,t, inspector){
             if((<any>cell).validateProperty)
             {
                 // console.log(cell);
@@ -32,7 +33,7 @@ export class InspectorService {
                 // (<any>cell).validateProperty(p,value);
 
                 $el.removeClass('error').parent().find('error').remove();
-                var error = cell.validateProperty(p, value);
+                var error = (<any>cell).validateProperty(p, value);
                 if (error) {
                     var $error = jQuery('<error></error>').text(error);
                     $el.addClass('error').after($error);
