@@ -21,6 +21,7 @@ import {HaloService} from './halo-service';
 import {KeyboardService} from './keyboard-service';
 import * as appShapes from '../shapes/app-shapes';
 import { Factory } from './factory-service';
+import { V } from '../../vendor/rappid';
 
 class KitchenSinkService {
 
@@ -84,7 +85,7 @@ class KitchenSinkService {
         const graph = this.graph = new joint.dia.Graph({}, {
             cellNamespace: appShapes
         });
-        window.graph = this.graph;
+        // window.graph = this.graph;
         // graph.on('add', (cell: joint.dia.Cell, collection: any, opt: any) => {
         //     // if (opt.stencil) this.inspectorService.create(cell);
         //     console.log('tojson',this.graph.toJSON());
@@ -108,13 +109,59 @@ class KitchenSinkService {
             linkPinning: false,
             snapLinks: true,
             // markAvailable: true,
-            validateConnection:function(cellViewS, magnetS, cellViewT, magnetT, end, linkView) {
+            validateConnection:function(cellViewSource, magnetS, cellViewTarget, magnetTarget, end, linkView) {
                 // Prevent linking from input ports.
+
                     if (magnetS && magnetS.getAttribute('port-group') === 'in') return false;
                     // Prevent linking from output ports to input ports within one element.
-                    if (cellViewS === cellViewT) return false;
+                    if (cellViewSource === cellViewTarget) return false;
                     // Prevent linking to input ports.
-                    return magnetT && magnetT.getAttribute('port-group') === 'in';
+                    if(magnetTarget && magnetTarget.getAttribute('port-group') !== 'in') return false;
+
+                    if (magnetTarget !== magnetS) {
+
+                        // if (end === 'target' && magnetT) {
+                        //     return portHelpers.validateCapacity(cellViewT.model, V(magnetT).attr('port'));
+                        // }
+                        if (end === 'target' && magnetTarget) {
+                            let targetLinks = graph.getConnectedLinks(cellViewTarget.model); //all links for the target cellview
+                            let sourceLinks = graph.getConnectedLinks(cellViewSource.model); 
+                            
+                            let sourceMagnet = V(magnetS).attr('port'); //portid for the source magnet
+                            let sourceId = cellViewSource.model.id;
+                            let targetMagnet = V(magnetTarget).attr('port'); //portid for the target magnet
+                            let targetId = cellViewTarget.model.id;
+
+                            //we need to check that there is no link from/to sourcemagnet containing sourceid
+                           
+
+                            // magnetTarget.getAttribute('port-group') === 'in'
+                            // let numberOfTargetConnections = [];
+                            let numberOfTargetConnections = _.filter(sourceLinks,function(link){
+                                let source = link.get('source') || {};
+                                let target = link.get('target') || {};
+
+                                return source.port === sourceMagnet && source.id === sourceId ||
+                                    target.id === sourceId && target.port === sourceMagnet 
+                                    ||
+                                    source.port === targetMagnet && source.id === targetId ||
+                                    target.id === targetId && target.port === targetMagnet
+                            });
+
+                            let numberOfSourceConnections = _.filter(targetLinks,function(link){
+                                let source = link.get('source') || {};
+                                let target = link.get('target') || {};
+
+                                return source.port === sourceMagnet && source.id === sourceId ||
+                                    target.id === sourceId && target.port === sourceMagnet 
+                                    ||
+                                    source.port === targetMagnet && source.id === targetId ||
+                                    target.id === targetId && target.port === targetMagnet
+                            });
+                            return numberOfSourceConnections.length + numberOfTargetConnections.length === 1
+                        }
+                    }
+                    return true;
                 }
         });
 
