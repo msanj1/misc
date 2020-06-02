@@ -54,6 +54,7 @@ export namespace app {
     export class HangUp extends joint.dia.Element{
         defaults(){
             return joint.util.defaultsDeep({
+             
                options:'normal',
                type: 'app.HangUp',
                markup: `<g><rect class="body"/>
@@ -139,7 +140,7 @@ export namespace app {
                 },
                ports: {
                 items: [
-                       { group: 'in' },
+                       { group: 'in', id: 'in' },
                     //   { group: 'out' },
                     // { group: 'out2' }
                 ],
@@ -177,40 +178,6 @@ export namespace app {
                                 args: null
                             }
                         }
-                    },
-                    'out': {
-                        markup: [{
-                            tagName: 'circle',
-                            selector: 'portBody',
-                            attributes: {
-                                'r': 10
-                            }
-                        }],
-                        attrs: {
-                            portBody: {
-                                magnet: true,
-                                fill: '#308AD0',
-                                strokeWidth: 0
-                            },
-                            portLabel: {
-                                fontSize: 11,
-                                fill: '#308AD0',
-                                fontWeight: 800
-                            }
-                        },
-                        position: {
-                            //  name: 'right',
-                            args: {
-                                y:'100',
-                                x: '200'
-                            }
-                        },
-                        label: {
-                            position: {
-                                name: 'radial',
-                                args: null
-                            }
-                        }
                     }
                 }
             }
@@ -240,13 +207,7 @@ export namespace app {
                markup: `<g><rect class="body"/>
                <text class="widgetName"></text>
                <text class="widgetTitle" ></text>
-               <image style="color:#6d6e71"/>
-              
-               <g>
-               <rect class="timeoutRect"  />
-               <text class="timeoutText" ><tspan x="7.11" y="0">Call Connected</tspan></text>
-               </g>
-               </g>`
+               <image style="color:#6d6e71"/></g>`
                 ,
                 attrs: {
                     '.': {
@@ -258,14 +219,6 @@ export namespace app {
                         refX: 0,
                         refY: 0,
                         fill: '#fff',
-                        // filter: {
-                        //     name: 'dropShadow',
-                        //     args: {
-                        //         dx: 0,
-                        //         dy: 0,
-                        //         blur: 3
-                        //     }
-                        // },
                         stroke: 0
                     },
                     '.widgetName': {
@@ -304,99 +257,42 @@ export namespace app {
                         fill:'#58595b',
                         fontFamily: 'ArialMT, Arial',
                         text: 'Dial 0422613824'
-                    },
-                    '.timeoutRect': {
-                        refWidth: '93%',
-                        height: '28',
-                        refX: 10,
-                        refY: '70%',
-                        fill: '#26A79F',
-                        magnet: true
-                    },
-                    '.timeoutText': {
-                        ref: '.timeoutRect',
-                        fontSize: 14,
-                        fill:'#fff',
-                        fontFamily: 'ArialMT, Arial',
-                        fontWeight:700,
-                        refX: '50%',
-                        refY: 19,
-                        textAnchor: 'middle'
                     }
                 },
                ports: {
                 items: [
-                    //   { group: 'in' },
-                    //   { group: 'out' },
-                    // { group: 'out2' }
+                      { group:'out',id:'success' },
                 ],
                 groups: {
-                    'in': {
-                        markup: [{
-                            tagName: 'circle',
-                            selector: 'portBody',
-                            attributes: {
-                                'r': 10
-                            }
-                        }],
-                        attrs: {
-                            portBody: {
-                                magnet: true,
-                                fill: '#308AD0',
-                                strokeWidth: 0
-                            },
-                            portLabel: {
-                                fontSize: 11,
-                                fill: '#308AD0',
-                                fontWeight: 800
-                            }
-                        },
-                        position: {
-                            name: 'ellipse',
-                            // args: {
-                            //     startAngle: 0,
-                            //     step: 30
-                            // }
-                        },
-                        label: {
-                            position: {
-                                name: 'radial',
-                                args: null
-                            }
-                        }
-                    },
+                 
                     'out': {
-                        markup: [{
-                            tagName: 'circle',
-                            selector: 'portBody',
-                            attributes: {
-                                'r': 10
-                            }
-                        }],
+                        markup: `<g class="outputPort">
+                        <rect class="timeoutRect"  />
+                        <text class="timeoutText" ><tspan x="7.11" y="0">Call Connected</tspan></text>
+                        </g>`,
                         attrs: {
-                            portBody: {
-                                magnet: true,
-                                fill: '#308AD0',
-                                strokeWidth: 0
+                            '.outputPort' :{
+                                magnet: true
                             },
-                            portLabel: {
-                                fontSize: 11,
-                                fill: '#308AD0',
-                                fontWeight: 800
-                            }
+                            '.timeoutRect': {
+                                width: '270',
+                                height: '28',
+                                fill: '#26A79F',
+                            },
+                            '.timeoutText': {
+                                ref: '.timeoutRect',
+                                fontSize: 14,
+                                fill:'#fff',
+                                fontFamily: 'ArialMT, Arial',
+                                fontWeight:700,
+                                refX: '50%',
+                                refY: 19,
+                                textAnchor: 'middle'
+                            },
                         },
                         position: {
-                            //  name: 'right',
-                            args: {
-                                y:'100',
-                                x: '200'
-                            }
-                        },
-                        label: {
-                            position: {
-                                name: 'radial',
-                                args: null
-                            }
+                            name: 'bottom',
+                            args:{x:10,y:80}
                         }
                     }
                 }
@@ -423,20 +319,11 @@ export namespace app {
                 musicOnHold: '',
 
                 type: 'app.Dial',
-                //  size: { width: 120, height: 120 },
-            //     markup: `<rect class="body"/><text class="question-text"/>
-            //     <rect class="option-successful"/>
-            //         <text class="option-successful-text"/>
-            //    `,
                markup: `<g><rect class="body"/>
                <text class="widgetName"></text>
                <text class="widgetTitle" ></text>
                <image style="color:#6d6e71"/>
                <text class="widgetDescription"></text>
-               <g>
-               <rect class="timeoutRect"  />
-               <text class="timeoutText" ><tspan x="7.11" y="0">Timeout</tspan></text>
-               </g>
                </g>`
                 ,
                 attrs: {
@@ -493,30 +380,12 @@ export namespace app {
                         fontSize: 14,
                         fill:'#58595b',
                         fontFamily: 'ArialMT, Arial'
-                    },
-                    '.timeoutRect': {
-                        refWidth: '93%',
-                        height: '28',
-                        refX: 10,
-                        refY: 150,
-                        fill: '#26A79F',
-                        magnet: true
-                    },
-                    '.timeoutText': {
-                        ref: '.timeoutRect',
-                        fontSize: 14,
-                        fill:'#fff',
-                        fontFamily: 'ArialMT, Arial',
-                        fontWeight:700,
-                        refX: '50%',
-                        refY: 19,
-                        textAnchor: 'middle'
                     }
                 },
                ports: {
                 items: [
-                      { group: 'in' },
-                    //   { group: 'out' },
+                      { group: 'in', id:'in' },
+                      { group: 'out', id:'timeout' },
                     // { group: 'out2' }
                 ],
                 groups: {
@@ -555,37 +424,33 @@ export namespace app {
                         }
                     },
                     'out': {
-                        markup: [{
-                            tagName: 'circle',
-                            selector: 'portBody',
-                            attributes: {
-                                'r': 10
-                            }
-                        }],
+                        markup: `<g class="outputPort">
+                        <rect class="timeoutRect"  />
+                        <text class="timeoutText" ><tspan x="7.11" y="0">Timeout</tspan></text>
+                        </g>`,
                         attrs: {
-                            portBody: {
-                                magnet: true,
-                                fill: '#308AD0',
-                                strokeWidth: 0
+                            '.outputPort' :{
+                                magnet: true
                             },
-                            portLabel: {
-                                fontSize: 11,
-                                fill: '#308AD0',
-                                fontWeight: 800
-                            }
+                            '.timeoutRect': {
+                                width: '270',
+                                height: '28',
+                                fill: '#26A79F',
+                            },
+                            '.timeoutText': {
+                                ref: '.timeoutRect',
+                                fontSize: 14,
+                                fill:'#fff',
+                                fontFamily: 'ArialMT, Arial',
+                                fontWeight:700,
+                                refX: '50%',
+                                refY: 19,
+                                textAnchor: 'middle'
+                            },
                         },
                         position: {
-                            //  name: 'right',
-                            args: {
-                                y:'163',
-                                x: '200'
-                            }
-                        },
-                        label: {
-                            position: {
-                                name: 'radial',
-                                args: null
-                            }
+                            name: 'bottom',
+                            args:{x:10,y:150}
                         }
                     }
                 }

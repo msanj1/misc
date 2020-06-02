@@ -84,10 +84,11 @@ class KitchenSinkService {
         const graph = this.graph = new joint.dia.Graph({}, {
             cellNamespace: appShapes
         });
-
-        graph.on('add', (cell: joint.dia.Cell, collection: any, opt: any) => {
-            // if (opt.stencil) this.inspectorService.create(cell);
-        });
+        window.graph = this.graph;
+        // graph.on('add', (cell: joint.dia.Cell, collection: any, opt: any) => {
+        //     // if (opt.stencil) this.inspectorService.create(cell);
+        //     console.log('tojson',this.graph.toJSON());
+        // });
 
         this.commandManager = new joint.dia.CommandManager({ graph: graph });
 
@@ -117,7 +118,8 @@ class KitchenSinkService {
                 }
         });
 
-        widgetFactory.createIncomingCallElement().addTo(graph);
+        // widgetFactory.createIncomingCallElement().addTo(graph);
+        graph.fromJSON(this.loadData());
         this.commandManager.reset();
 
         paper.on('blank:mousewheel', _.partial(this.onMousewheel, null), this);
@@ -133,6 +135,86 @@ class KitchenSinkService {
 
         this.renderPlugin('.paper-container', paperScroller);
         paperScroller.render().center();
+    }
+
+    loadData(){
+        // return new app.Dial({
+        //     size: { width: 290, height: 190 },
+        //     position: { x: 400, y: 100 },
+        // });
+        return {
+            'cells': [
+                {
+                    'id': "ca5508e5-2fd0-4eb6-9c41-bde7223d93a6",
+                    'type' : 'app.IncomingCall',
+                    'size': { 'width': 290, 'height': 120 },
+                    'position': { 'x': 400, 'y': 100 },
+                    'ports' : {
+                        'items': [
+                            {
+                                'group': 'out',
+                                'id': 'success'
+                            }
+                        ]
+                    }
+                } ,
+                {
+                    'id': "d6469c4d-8e98-487f-97c1-38c5d2c803bb",
+                    'type' : 'app.Dial',
+                    'size': { 'width': 290, 'height': 190 },
+                    'position': { 'x': 400, 'y': 300 },
+                    'ports' : {
+                        'items': [
+                            {
+                                'group': 'in','id': 'in'
+                            },
+                            {
+                                'group': 'out','id': 'timeout'
+                            }
+                        ]
+                    }
+                }, 
+                {
+                    'id': "6d840261-76ed-41b9-b4dc-268d4bb6ec7e",
+                    'type' : 'app.Link',
+                    'source' : {
+                        'id': 'ca5508e5-2fd0-4eb6-9c41-bde7223d93a6',
+                        'port': 'success'
+                    },
+                    target: {
+                        'id': 'd6469c4d-8e98-487f-97c1-38c5d2c803bb',
+                        'port': 'in'
+                    }
+                },
+                {
+
+                    'id': "d6469c4d-8e98-487f-97c1-38c5d2c803bc",
+                    'type' : 'app.HangUp',
+                    'size': { 'width': 290, 'height': 80 },
+                    'position': { 'x': 400, 'y': 620 },
+                    'ports' : {
+                        'items': [
+                            {
+                                'group': 'in',
+                                'id': 'in'
+                            }
+                        ]
+                    }
+                },
+                {
+                    'id': "6d840261-76ed-41b9-b4dc-268d4bb6ec7g",
+                    'type' : 'app.Link',
+                    'source' : {
+                        'id': 'd6469c4d-8e98-487f-97c1-38c5d2c803bb',
+                        'port': 'timeout'
+                    },
+                    target: {
+                        'id': 'd6469c4d-8e98-487f-97c1-38c5d2c803bc',
+                        'port': 'in'
+                    }
+                }
+            ]
+        };
     }
 
     initializeStencil() {
